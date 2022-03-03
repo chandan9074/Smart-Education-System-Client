@@ -1,6 +1,4 @@
 import React from "react";
-import facebook from "../assets/Images/facebook-icon.png";
-import linkedIn from "../assets/Images/linkedin-icon.png";
 
 const Footer = () => {
   return (
