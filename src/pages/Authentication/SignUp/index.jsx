@@ -80,28 +80,21 @@ const SignUp = () => {
   return (
     <div className='flex justify-center min-h-screen bg-gray-100 mt-12'>
       <div className='container my-12 max-w-xl border-2 border-gray-200 p-3 bg-white sm:mx-8 rounded-tl-lg rounded-br-lg'>
-        {/* <div className='text-center my-6'>
-          <h1 className='text-3xl font-semibold text-gray-700'>Sign up</h1>
-          <p className='text-gray-500 text-sm py-2'>
-            Join us and make learing more easy and better.
-          </p>
-        </div> */}
-
         <div className='flex w-11/12 lg:w-full mx-auto my-6'>
+          <Link className='w-full hover:text-black' to={"/signin"}>
+            <div className=' py-2 text-center'>Sign In</div>
+          </Link>
           <Link
-            className='w-full color-secendary hover:text-black'
+            className='w-full border-b-4 border-secendary hover:text-black'
             to={"/signup"}
           >
             <div className='py-2 text-center'>Sign Up</div>
-          </Link>
-          <Link className='w-full hover:text-black' to={"/signin"}>
-            <div className=' py-2 text-center'>Sign In</div>
           </Link>
         </div>
 
         <div className='m-6'>
           <p className='text-gray-500 text-sm text-center italic py-2 mt-6 mb-10'>
-            <span className="font-semibold">
+            <span className='font-semibold'>
               “Live as if you were to die tomorrow. Learn as if you were to live
               forever.” - Mahatma Gandhi
             </span>

@@ -36,14 +36,14 @@ const SignIn = () => {
         </div> */}
 
         <div className='flex w-11/12 lg:w-full mx-auto my-6'>
-          <Link className='w-full hover:text-black' to={"/signup"}>
-            <div className='py-2 text-center'>Sign Up</div>
-          </Link>
           <Link
-            className='w-full color-secendary hover:text-black'
+            className='w-full border-b-4 border-secendary hover:text-black'
             to={"/signin"}
           >
             <div className=' py-2 text-center'>Sign In</div>
+          </Link>
+          <Link className='w-full hover:text-black' to={"/signup"}>
+            <div className='py-2 text-center'>Sign Up</div>
           </Link>
         </div>
 

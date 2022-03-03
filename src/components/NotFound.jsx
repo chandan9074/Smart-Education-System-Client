@@ -10,7 +10,7 @@ const PageNotFound = () => {
         <img width="70%" src={NotFound} alt='' />
         <Link
           to='/'
-          className='color-secendary py-2 px-5 mt-2 rounded-full text-lack font-semibold'
+          className='color-secendary hover:text-black py-2 px-5 mt-2 rounded-full text-lack font-semibold'
         >
           Go back to Home
         </Link>

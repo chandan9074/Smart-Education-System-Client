@@ -24,6 +24,11 @@ code {
   background-color: #03ef62;
 }
 
+
+.border-secendary {
+  border-color: #03ef62;
+}
+
 .color-secendary-hover:hover {
   background-color: #03ef62;
   transition-property: background-color;
