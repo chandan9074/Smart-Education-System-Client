@@ -17,5 +17,16 @@ code {
 }
 
 .color-primary {
-  background-color: rgb(3, 3, 19);
+  background-color: #05192d;
+}
+
+.color-secendary {
+  background-color: #03ef62;
+}
+
+.color-secendary-hover:hover {
+  background-color: #03ef62;
+  transition-property: background-color;
+  transition-delay: 0.1s;
+  transition-timing-function: ease-in-out;
 }

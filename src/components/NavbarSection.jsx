@@ -5,7 +5,7 @@ import Icons from "./Icons";
 function NavbarSection() {
   return (
     <Navbar
-      className='px-20 color-primary'
+      className='w-screen px-20 py-2.5 color-primary fixed top-0'
       variant='light'
       expand='lg'
     >
