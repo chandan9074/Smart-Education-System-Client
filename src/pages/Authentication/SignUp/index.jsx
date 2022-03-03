@@ -100,6 +100,13 @@ const SignUp = () => {
         </div>
 
         <div className='m-6'>
+          <p className='text-gray-500 text-sm text-center italic py-2 mt-6 mb-10'>
+            <span className="font-semibold">
+              “Live as if you were to die tomorrow. Learn as if you were to live
+              forever.” - Mahatma Gandhi
+            </span>
+            <br /> Join us and make learing more easy and better.
+          </p>
           <form
             className='mb-4'
             onSubmit={(e) => {
@@ -218,7 +225,7 @@ const SignUp = () => {
                   id='confirm_password'
                   required
                   placeholder='Confirm Your password'
-                  className='w-full px-3 py-2 placeholder-gray-600 border bg-gray-100 rounded-md focus:outline-none focus:ring focus:ring-gray-200 focus:border-gray-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500'
+                  className='w-full px-3 py-2 placeholder-gray-600 border bg-gray-100 rounded-md focus:outline-none focus:ring focus:ring-gray-200 focus:border-gray-300'
                   onChange={(e) => loadData(e)}
                   value={userdata.confirm_password}
                 />
@@ -263,9 +270,6 @@ const SignUp = () => {
             <button className='w-1/3 mx-auto color-secendary rounded-md hover:opacity-90 focus:outline-none duration-100  text-black font-semibold p-2 flex flex-row justify-center gap-2 items-center ease-in-out'>
               Google
             </button>
-            {/* <button className='bg-gray-700 font-semibold text-white w-full p-2 flex flex-row justify-center gap-2 items-center rounded-sm hover:bg-gray-800 duration-100 ease-in-out'>
-              Facebook
-            </button> */}
           </div>
         </div>
       </div>
