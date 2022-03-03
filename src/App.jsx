@@ -5,6 +5,7 @@ import SignIn from "./pages/Authentication/Signin";
 import SignUp from "./pages/Authentication/SignUp";
 import PageNotFound from "./components/NotFound";
 import Dashboard from "./pages/Dashboard";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
+      <Footer/>
     </div>
   );
 }
