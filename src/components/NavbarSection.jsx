@@ -1,16 +1,16 @@
 import { Nav, Navbar } from "react-bootstrap";
-import '../index.css'
+import "../index.css";
 import Icons from "./Icons";
 
 function NavbarSection() {
   return (
     <Navbar
-      className='w-screen px-20 py-2.5 color-primary fixed top-0'
-      variant='light'
+      className='w-screen px-20 py-2.5 color-primary fixed top-0 z-50'
+      variant='dark'
       expand='lg'
     >
       <Navbar.Brand className='font-medium text-xl text-white' href='#'>
-        Smart Education System
+        S.E.S
       </Navbar.Brand>
       <Navbar.Toggle aria-controls='navbarScroll' />
       <Navbar.Collapse id='navbarScroll'>
@@ -26,8 +26,8 @@ function NavbarSection() {
             Courses
           </Nav.Link>
         </Nav>
-        <Nav.Link className='pl-20 text-md text-black'>
-          <Icons.Grafuation />
+        <Nav.Link className='pl-20 text-md text-white'>
+          <Icons.Grafuation className='w-6 ' />
         </Nav.Link>
       </Navbar.Collapse>
     </Navbar>

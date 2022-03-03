@@ -4,6 +4,7 @@ import NavarSection from "./components/NavbarSection";
 import SignIn from "./pages/Authentication/Signin";
 import SignUp from "./pages/Authentication/SignUp";
 import PageNotFound from "./components/NotFound";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path='/signup' element={<SignUp />} />
         <Route path='/signin' element={<SignIn />} />
+        <Route path='/dashboard' element={<Dashboard />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </div>
