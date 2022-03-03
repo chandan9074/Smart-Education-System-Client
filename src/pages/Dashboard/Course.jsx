@@ -19,16 +19,16 @@ const Course = () => {
               </h6>
               <p>CSE111 (A)</p>
             </a>
-            <a
+            {/* <a
               id='1'
               className='color-secendary ml-auto -mr-32 px-3 py-2 text-3xl font-semibold hover:text-black cursor-pointer rounded-tl-full rounded-tr-full rounded-bl-full'
             >
               +
-            </a>
+            </a> */}
           </div>
           <img
             src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80'
-            className='w-16 h-16 absolute right-4 top-1/3 rounded-circle border-2'
+            className='w-16 h-16 absolute right-4 top-1/2 rounded-circle border-2'
             alt='instructor'
           />
         </div>
