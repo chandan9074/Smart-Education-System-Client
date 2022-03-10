@@ -10,14 +10,14 @@ import Profile from "./pages/Profile";
 
 function App() {
   return (
-    <div>
+    <div className='bg-gray-100'>
       <NavarSection />
       <Routes>
         <Route path='/signup' element={<SignUp />} />
         <Route path='/signin' element={<SignIn />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/profile' element={<Profile />} />
-        
+
         <Route path='*' element={<PageNotFound />} />
       </Routes>
       <Footer />

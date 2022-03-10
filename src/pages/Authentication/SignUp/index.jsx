@@ -78,7 +78,7 @@ const SignUp = () => {
     }
   };
   return (
-    <div className='flex justify-center min-h-screen bg-gray-100 mt-12'>
+    <div className='flex justify-center min-h-screen bg-gray-100 mt-12 px-4 md:px-0'>
       <div className='container my-12 max-w-xl border-2 border-gray-200 p-3 bg-white sm:mx-8 rounded-tl-lg rounded-br-lg'>
         <div className='flex w-11/12 lg:w-full mx-auto my-6'>
           <Link className='w-full hover:text-black' to={"/signin"}>
