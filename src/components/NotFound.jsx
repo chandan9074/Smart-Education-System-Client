@@ -5,8 +5,8 @@ import NotFound from "../assets/GIF/NotFoundGIF.gif";
 const PageNotFound = () => {
   // this Component is for the wrong routes
   return (
-    <div>
-      <div className='flex flex-col items-center w-7/12 pb-16 mx-auto my-10 rounded-md'>
+    <div className="min-h-screen">
+      <div className='pt-24 flex flex-col items-center w-7/12 pb-16 mx-auto my-10 rounded-md'>
         <img width="70%" src={NotFound} alt='' />
         <Link
           to='/'
