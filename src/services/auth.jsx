@@ -1,6 +1,7 @@
 import coreAxios from "../utils/axios";
 
 export const handleSignup = async (userdata) => {
+  console.log(userdata);
   try {
     const result = await coreAxios.post(
       `/accounts/registration/`,

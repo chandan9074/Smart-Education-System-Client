@@ -5,7 +5,7 @@ import zxcvbn from "zxcvbn";
 import { handleSignup } from "../../../services/auth";
 
 const SignUp = () => {
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const [userdata, setUserdata] = useState(initialUserData);
 
@@ -45,7 +45,7 @@ const SignUp = () => {
   };
 
   // Handeling form submission
-  const onSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Confirm Password mathching Checker
     if (
@@ -57,7 +57,7 @@ const SignUp = () => {
 
       if (data?.status === 201) {
         setUserdata(initialUserData);
-        history.push("/verify");
+        navigate("/verify");
       } else {
         message.error(data?.data.msg);
       }
@@ -67,14 +67,14 @@ const SignUp = () => {
         display: "block",
       });
 
-      // setUserdata({
-      //   first_name: userdata.first_name,
-      //   last_name: userdata.last_name,
-      //   username: userdata.username,
-      //   email: userdata.email,
-      //   password: userdata.password,
-      //   confirm_password: userdata.confirm_password,
-      // });
+      setUserdata({
+        first_name: userdata.first_name,
+        last_name: userdata.last_name,
+        username: userdata.username,
+        email: userdata.email,
+        password: userdata.password,
+        confirm_password: userdata.confirm_password,
+      });
     }
   };
   return (
@@ -103,7 +103,7 @@ const SignUp = () => {
           <form
             className='mb-4'
             onSubmit={(e) => {
-              onSubmit(e);
+              handleSubmit(e);
             }}
           >
             <div className='mb-6 flex'>
