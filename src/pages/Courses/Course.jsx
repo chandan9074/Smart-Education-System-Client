@@ -1,13 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import course from "../../assets/Images/course.png";
 
 const Course = () => {
   return (
     <div className='col'>
       <div className='card bg-white p-2 mx-auto' style={{ width: "17rem" }}>
-        <a href='/' className='text-decoration-none text-dark'>
+        <Link to={'/course/BAN101'} className='text-decoration-none text-dark'>
           <img src={course} className='card-img-top opacity-80' alt='...' />
-        </a>
+        </Link>
         <div className='card-body flex justify-between'>
           <div className='mt-3 flex flex-col'>
             <a href='/dashboard' className='text-decoration-none text-dark'>

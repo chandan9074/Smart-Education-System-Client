@@ -7,6 +7,7 @@ import PageNotFound from "./components/NotFound";
 import Dashboard from "./pages/Dashboard";
 import Footer from "./components/Footer";
 import Profile from "./pages/Profile";
+import CourseDetails from "./pages/Courses/CourseDetails";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/signup' element={<SignUp />} />
         <Route path='/signin' element={<SignIn />} />
         <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/course/:id' element={<CourseDetails/>} />
         <Route path='/profile' element={<Profile />} />
 
         <Route path='*' element={<PageNotFound />} />
