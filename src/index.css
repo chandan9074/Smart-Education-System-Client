@@ -32,6 +32,9 @@ code {
   color: #03ef62;
 }
 
+.text-secendary-hover:hover {
+  color: #03ef62;
+}
 
 .border-secendary {
   border-color: #03ef62;
