@@ -24,6 +24,14 @@ code {
   background-color: #03ef62;
 }
 
+.text-primary {
+  color: #05192d;
+}
+
+.text-secendary {
+  color: #03ef62;
+}
+
 
 .border-secendary {
   border-color: #03ef62;

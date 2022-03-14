@@ -1,8 +1,19 @@
+import { useEffect, useState } from "react";
 import { Nav, Navbar } from "react-bootstrap";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../index.css";
 import Icons from "./Icons";
 
 function NavbarSection() {
+  const [activeClass, setActiveClass] = useState("");
+  const navigator = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    setActiveClass(location.pathname);
+    console.log(activeClass);
+  }, [location.pathname, activeClass]);
+
   return (
     <Navbar
       className='w-screen px-20 py-2.5 color-primary fixed top-0 z-50'
@@ -19,12 +30,28 @@ function NavbarSection() {
           style={{ maxHeight: "100px" }}
           navbarScroll
         >
-          <Nav.Link className='font-semibold text-md text-white'>
+          <p
+            className={`${
+              activeClass === "/dashboard" ? `text-secendary` : `text-white`
+            } font-semibold text-md my-auto mx-3 cursor-pointer`}
+            onClick={() => {
+              setActiveClass("/dashboard");
+              navigator("/dashboard");
+            }}
+          >
             Dashboard
-          </Nav.Link>
-          <Nav.Link className='font-semibold text-md text-white'>
+          </p>
+          <p
+            className={`${
+              activeClass === "/courses" ? `text-secendary` : `text-white`
+            } font-semibold text-md my-auto mx-3 cursor-pointer`}
+            onClick={() => {
+              setActiveClass("/courses");
+              navigator("/signup");
+            }}
+          >
             Courses
-          </Nav.Link>
+          </p>
         </Nav>
         <Nav.Link className='pl-20 text-md text-white'>
           <Icons.Grafuation className='w-6 ' />

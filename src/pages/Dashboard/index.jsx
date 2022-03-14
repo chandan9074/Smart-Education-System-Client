@@ -1,6 +1,5 @@
 import React from "react";
-import Icons from "../../components/Icons";
-import Course from "./Course";
+import Course from "../Courses/Course";
 
 const Dashboard = () => {
   return (
@@ -18,7 +17,7 @@ const Dashboard = () => {
             type='button'
             id='button-addon2'
           >
-            <i class='fas fa-search'></i>
+            <i className='fas fa-search'></i>
           </button>
         </div>
         <div className='recently_visited container'>

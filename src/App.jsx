@@ -10,7 +10,7 @@ import Profile from "./pages/Profile";
 
 function App() {
   return (
-    <div className='bg-gray-100'>
+    <div className='bg-gray-50'>
       <NavarSection />
       <Routes>
         <Route path='/signup' element={<SignUp />} />
