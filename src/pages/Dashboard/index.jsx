@@ -2,6 +2,8 @@ import React from "react";
 import Course from "../Courses/Course";
 
 const Dashboard = () => {
+    document.title = "Dashboard -All Courses";
+
   return (
     <div>
       <section className='my-5 pt-5 bg-gray-50'>

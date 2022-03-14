@@ -5,7 +5,7 @@ import CourseContent from "./CourseContent";
 
 const CourseDetails = () => {
   const courseId = useParams();
-  document.title = `${courseId.id} - All Contents`;
+  document.title = `${courseId.id} -All Contents`;
   const [contents, setContents] = useState([1, 2, 3]);
 
   return (

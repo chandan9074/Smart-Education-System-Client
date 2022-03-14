@@ -4,6 +4,8 @@ import { handleSignin } from "../../../services/auth";
 import { Link } from "react-router-dom";
 
 const SignIn = () => {
+  document.title = "S.E.S -Sign In";
+
   const [data, setData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
 

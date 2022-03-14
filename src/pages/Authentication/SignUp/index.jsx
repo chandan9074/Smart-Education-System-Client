@@ -5,6 +5,8 @@ import zxcvbn from "zxcvbn";
 import { handleSignup } from "../../../services/auth";
 
 const SignUp = () => {
+  document.title = "S.E.S -Sign Up";
+
   const navigate = useNavigate();
 
   const [userdata, setUserdata] = useState(initialUserData);
