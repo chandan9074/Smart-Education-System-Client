@@ -101,7 +101,7 @@ const SignIn = () => {
             <div className='mb-6'>
               <button
                 type='submit'
-                className='w-full px-3 py-2 border border-gray-800 text-black font-semibold color-secendary-hover rounded-md hover:opacity-90 focus:outline-none duration-100 ease-in-out'
+                className='w-full px-3 py-2 border border-gray-800 text-black font-semibold color-secendary rounded-md hover:opacity-90 focus:outline-none duration-100 ease-in-out'
               >
                 Sign In
               </button>
@@ -124,7 +124,7 @@ const SignIn = () => {
             <div className='w-full bg-gray-200 mt-3 h-px'></div>
           </div>
           <div>
-            <button className='w-1/3 mx-auto color-secendary rounded-md hover:opacity-90 focus:outline-none duration-100  text-black font-semibold p-2 flex flex-row justify-center gap-2 items-center ease-in-out'>
+            <button className='w-1/3 mx-auto color-secendary-hover border border-green-600 rounded-md hover:opacity-90 focus:outline-none duration-100  text-black font-semibold p-2 flex flex-row justify-center gap-2 items-center ease-in-out'>
               Google
             </button>
           </div>
