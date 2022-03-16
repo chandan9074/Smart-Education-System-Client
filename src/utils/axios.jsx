@@ -4,7 +4,6 @@ const coreAxios = axios.create({
   // baseURL: process.env.REACT_APP_SERVICE_URL,
   baseURL: "http://127.0.0.1:8000",
 });
-console.log(process.env.REACT_APP_SERVICE_URL);
 
 export default coreAxios;
 

@@ -11,7 +11,6 @@ function NavbarSection() {
 
   useEffect(() => {
     setActiveClass(location.pathname);
-    console.log(activeClass);
   }, [location.pathname, activeClass]);
 
   return (

@@ -25,7 +25,7 @@ const welcome = () => {
               </p>
 
               <button className='my-4 color-secendary font-semibold border-0 px-3 py-2 rounded-pill'>
-                <Link className='hover:text-black' to='/dashboard'>
+                <Link className='text-black hover:text-black' to='/dashboard'>
                   Get Started
                 </Link>
               </button>
