@@ -31,3 +31,14 @@ export const handleAuthenticateStudent = async (studentInfo) => {
     return error.response.data;
   }
 };
+
+export const loadStudentsYearlyResult = async (username) => {
+  try {
+    const result = await coreAxios.get(
+      `/results/students-yearly-result/${username}`,
+    );
+    return result;
+  } catch (error) {
+    return error.response.data;
+  }
+};

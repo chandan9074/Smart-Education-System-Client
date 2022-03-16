@@ -56,7 +56,7 @@ const CheckProgresses = () => {
       <div className='bg-white px-14 py-10 rounded shadow-sm m-auto w-1/2 flex flex-col justify-center items-center'>
         <div className='mb-4'>
           <h3 className='text-2xl font-semibold mb-6'>
-            Track all progresses in one place.
+            Quickly Track all progresses.
           </h3>
           <div className='ml-4'>
             <ul className='list-disc list-inside'>
