@@ -16,7 +16,7 @@ const Footer = () => {
         </div>
 
         <div className='mt-5 flex flex-col items-center mx-auto'>
-          <h4 className='flex justify-center md:justify-start items-center md:-ml-8 text-xl font-semibold mb-4'>
+          <h4 className='text-white flex justify-center md:justify-start items-center md:-ml-8 text-xl font-semibold mb-4'>
             Destiny
           </h4>
           <div className='grid grid-cols-4 md:grid-cols-1'>
@@ -27,7 +27,7 @@ const Footer = () => {
           </div>
         </div>
         <div className=' mt-5 mx-auto'>
-          <h4 className='flex justify-center md:justify-start items-center mb-4 text-xl font-semibold'>
+          <h4 className='text-white flex justify-center md:justify-start items-center mb-4 text-xl font-semibold'>
             For any Support
           </h4>
           <div>
@@ -58,7 +58,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <h6 className='text-center bg_lightgreen pb-4 py-4 m-0 fw-normal'>
+      <h6 className='text-white text-center bg_lightgreen pb-4 py-4 font-light'>
         S.E.S ©2022. All rights reserved to S.E.S
       </h6>
     </div>
