@@ -27,16 +27,12 @@ const Progrecesses = () => {
       const ifRes = yearlyResults.find(
         (res) => parseInt(res.class_name.class_name) === i
       );
-      console.log(ifRes);
-      console.log(i);
       data.push([
         `${i} (${ifRes.percentage}%)`,
         parseFloat(ifRes.marks),
         parseFloat(ifRes.total_marks),
       ]);
     } else {
-      console.log(i);
-
       data.push([`${i}`, 0, 0]);
     }
   }

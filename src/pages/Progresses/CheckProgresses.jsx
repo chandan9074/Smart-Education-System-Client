@@ -1,6 +1,6 @@
 import { InfoCircleOutlined, UserOutlined } from "@ant-design/icons";
 import { DatePicker, Input, Tooltip } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { handleAuthenticateStudent } from "../../services/auth";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,12 @@ const CheckProgresses = () => {
     username: "",
     dob: "",
   });
+
+  useEffect(() => {
+    if (localStorage.getItem("student")) {
+      naviator(`/progresses/${localStorage.getItem("student")}`);
+    }
+  }, []);
 
   const dateFormat = "YYYY/MM/DD";
 
@@ -39,6 +45,7 @@ const CheckProgresses = () => {
           marginTop: "10vh",
         },
       });
+      localStorage.setItem("student", athenticate.data?.username);
       naviator(`/progresses/${athenticate.data?.username}`);
     } else {
       message.error({
@@ -92,10 +99,6 @@ const CheckProgresses = () => {
             onChange={(e) => {
               customFormat(e);
             }}
-            // onChange={(e) => {
-            //   loadStudentInfo(e.format(dateFormat))
-            //   console.log(e.target.id);
-            // }}
           />
 
           <button
