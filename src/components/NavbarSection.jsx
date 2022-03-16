@@ -18,6 +18,7 @@ function NavbarSection() {
       className='w-screen px-20 py-2.5 color-primary fixed top-0 z-50'
       variant='dark'
       expand='lg'
+      style={{ zIndex: "9999" }}
     >
       <Navbar.Brand className='font-medium text-xl text-white' href='#'>
         S.E.S

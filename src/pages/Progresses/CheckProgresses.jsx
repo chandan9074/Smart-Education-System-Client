@@ -1,22 +1,58 @@
-import React from "react";
-import { Input, DatePicker, Tooltip } from "antd";
 import { InfoCircleOutlined, UserOutlined } from "@ant-design/icons";
-import moment from "moment";
+import { DatePicker, Input, Tooltip } from "antd";
+import { useState } from "react";
+import { handleAuthenticateStudent } from "../../services/auth";
+import { message } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const CheckProgresses = () => {
-  // const onChange = (date, dateString) => {
-  //   console.log(date, dateString);
-  // };
+  const naviator = useNavigate();
 
-  // const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY"];
+  const [studentInfo, setStudentInfo] = useState({
+    username: "",
+    dob: "",
+  });
+
   const dateFormat = "YYYY/MM/DD";
 
   const customFormat = (value) => {
     console.log(value.format(dateFormat));
+    const data = { ...studentInfo };
+    data["dob"] = value.format(dateFormat);
+    setStudentInfo(data);
+  };
+
+  const loadStudentInfo = (e) => {
+    const data = { ...studentInfo };
+    data[e.target.id] = e.target.value;
+    setStudentInfo(data);
+  };
+
+  const handleStudentInfoSubmit = async (e) => {
+    e.preventDefault();
+    const athenticate = await handleAuthenticateStudent(studentInfo);
+    if (athenticate.status === 200) {
+      message.success({
+        content: "Student's information Matched",
+        className: "custom-class",
+        style: {
+          marginTop: "10vh",
+        },
+      });
+      naviator(`/progresses/${athenticate.data?.username}`);
+    } else {
+      message.error({
+        content: "Wrong ID or Date of Birth",
+        className: "custom-class",
+        style: {
+          marginTop: "10vh",
+        },
+      });
+    }
   };
 
   return (
-    <div className='min-h-screen pt-20 flex justify-center items-center'>
+    <div className='min-h-screen pt-28 flex justify-center items-center'>
       <div className='bg-white px-14 py-10 rounded shadow-sm m-auto w-1/2 flex flex-col justify-center items-center'>
         <div className='mb-4'>
           <h3 className='text-2xl font-semibold mb-6'>
@@ -31,10 +67,16 @@ const CheckProgresses = () => {
             </ul>
           </div>
         </div>
-        <form className='w-1/2 mx-auto flex flex-col items-center'>
+        <form
+          onSubmit={(e) => handleStudentInfoSubmit(e)}
+          className='w-1/2 mx-auto flex flex-col items-center'
+        >
           <Input
-            className='mb-4 px-8 py-2'
+            required
+            className='mb-4 px-8 py-2 bg-white'
             placeholder='Enter student ID'
+            id='username'
+            onChange={(e) => loadStudentInfo(e)}
             prefix={<UserOutlined className='site-form-item-icon pr-2' />}
             suffix={
               <Tooltip title='ID provided from School'>
@@ -43,12 +85,17 @@ const CheckProgresses = () => {
             }
           />
           <DatePicker
-            className='date-picker'
+            id='dob'
+            className='date-picker z-0'
             placeholder='Date of Birth'
             format={dateFormat}
             onChange={(e) => {
               customFormat(e);
             }}
+            // onChange={(e) => {
+            //   loadStudentInfo(e.format(dateFormat))
+            //   console.log(e.target.id);
+            // }}
           />
 
           <button
