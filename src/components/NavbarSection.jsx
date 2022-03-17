@@ -13,6 +13,7 @@ function NavbarSection() {
     setActiveClass(location.pathname);
   }, [location.pathname, activeClass]);
 
+  
   return (
     <Navbar
       className='w-screen px-20 py-2.5 color-primary fixed top-0 z-50'
@@ -43,14 +44,17 @@ function NavbarSection() {
           </p>
           <p
             className={`${
-              activeClass === "/courses" ? `text-secendary` : `text-white`
+              (activeClass === "/check-progresses") |
+              (activeClass === `/progresses/${localStorage.getItem("student")}`)
+                ? `text-secendary`
+                : `text-white`
             } font-semibold text-md my-auto mx-3 cursor-pointer`}
             onClick={() => {
-              setActiveClass("/courses");
-              navigator("/signup");
+              setActiveClass("/check-progresses");
+              navigator("/check-progresses");
             }}
           >
-            Courses
+            Progrecesses
           </p>
         </Nav>
         <Nav.Link className='pl-20 text-md text-white'>

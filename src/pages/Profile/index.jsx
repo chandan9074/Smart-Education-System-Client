@@ -16,7 +16,7 @@ const Profile = () => {
                 {/* Stdents */}
                 <img src={user} width='15%' alt='' />
               </h4>
-              <a className='text-dark' href=''>
+              <a className='text-dark' href='/'>
                 <i className='fas fa-edit pointer'></i>
               </a>
             </div>

@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { loadClasswiseCourses } from "../../services/auth";
 import Course from "../Courses/Course";
 
 const Dashboard = () => {
-    document.title = "Dashboard -All Courses";
+  document.title = "Dashboard -All Courses";
+
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const classwiseCourses = await loadClasswiseCourses();
+      if (classwiseCourses.status === 200) {
+        setCourses(classwiseCourses.data);
+      }
+    })();
+  }, []);
+
 
   return (
     <div>
@@ -23,22 +36,15 @@ const Dashboard = () => {
           </button>
         </div>
         <div className='recently_visited container'>
-          <div className='d-flex justify-content-between align-items-center py-3'>
-            <h3>Recently Visited</h3>
-            <a href='#all_course' className='text-decoration-none text-dark'>
-              <h6>View all</h6>
-            </a>
-          </div>
           <div className='row row-cols-1 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 g-4'>
-            <Course />
-            <Course />
-            <Course />
-            <Course />
-            <Course />
-            <Course />
-            <Course />
+            {courses.length ? (
+              courses.map((course) => (
+                <Course key={course.id} course={course} />
+              ))
+            ) : (
+              <p className='text-2xl font-semibold'>No Courses Available</p>
+            )}
           </div>
-          <p className="text-2xl font-semibold">No Courses Available</p>
         </div>
       </section>
     </div>

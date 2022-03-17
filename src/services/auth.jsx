@@ -42,3 +42,13 @@ export const loadStudentsYearlyResult = async (username) => {
     return error.response.data;
   }
 };
+
+
+export const loadClasswiseCourses = async () => {
+  try {
+    const result = await coreAxios.get("/courses/course-view/");
+    return result;
+  } catch (error) {
+    return error.response.data;
+  }
+};

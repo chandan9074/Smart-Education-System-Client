@@ -14,10 +14,10 @@ const CheckProgresses = () => {
   });
 
   useEffect(() => {
-    if (localStorage.getItem("student")) {
+    if (localStorage.getItem("student") || localStorage.getItem("token")) {
       naviator(`/progresses/${localStorage.getItem("student")}`);
     }
-  }, []);
+  });
 
   const dateFormat = "YYYY/MM/DD";
 

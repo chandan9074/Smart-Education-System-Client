@@ -14,7 +14,7 @@ const Progrecesses = () => {
         setYearlyResults(yresults.data);
       }
     })();
-  }, []);
+  }, [student.username]);
 
   console.log(yearlyResults);
 
@@ -45,7 +45,7 @@ const Progrecesses = () => {
 
   return (
     <div className='min-h-screen pt-16'>
-      <div className='container h-96 mt-8 p-8 bg-white'>
+      <div className='container mt-8 p-8 bg-white'>
         <h1 className='text-center text-2xl mb-6'>Classwise Results</h1>
         <div>
           <Chart

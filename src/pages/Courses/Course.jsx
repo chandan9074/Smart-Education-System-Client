@@ -1,13 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import course from "../../assets/Images/course.png";
+import courseBg from "../../assets/Images/course.png";
 
-const Course = () => {
+const Course = ({ course }) => {
+  const classes = course?.classes;
+  console.log(classes[0].class_sec.section);
+  const assignedClasses = [];
+
+  course?.classes.forEach((i) => {
+    console.log(i.class_sec.section);
+    if (!assignedClasses.includes(i.class_sec.section)) {
+      assignedClasses.push(i.class_sec.section);
+    }
+  });
+
   return (
     <div className='col'>
       <div className='card bg-white p-2 mx-auto' style={{ width: "17rem" }}>
-        <Link to={'/course/BAN101'} className='text-decoration-none text-dark'>
-          <img src={course} className='card-img-top opacity-80' alt='...' />
+        <Link
+          to={`/course/${course.id}`}
+          className='text-decoration-none text-dark'
+        >
+          <img src={courseBg} className='card-img-top opacity-80' alt='...' />
         </Link>
         <div className='card-body flex justify-between'>
           <div className='mt-3 flex flex-col'>
@@ -16,9 +30,12 @@ const Course = () => {
                 className='card-title font-semibold mb-1 text-truncate'
                 style={{ maxWidth: "200px" }}
               >
-                Course Name
+                {course.title}
               </h6>
-              <p>CSE111 (A)</p>
+              <p>
+                {course.course_code} (
+                {assignedClasses.map((name) => " " + name + " ")})
+              </p>
             </a>
             {/* <a
               id='1'
