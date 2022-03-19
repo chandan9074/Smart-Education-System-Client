@@ -35,7 +35,7 @@ export const handleAuthenticateStudent = async (studentInfo) => {
 export const loadStudentsYearlyResult = async (username) => {
   try {
     const result = await coreAxios.get(
-      `/results/students-yearly-result/${username}`,
+      `/results/students-yearly-result/${username}`
     );
     return result;
   } catch (error) {
@@ -43,10 +43,18 @@ export const loadStudentsYearlyResult = async (username) => {
   }
 };
 
-
 export const loadClasswiseCourses = async () => {
   try {
     const result = await coreAxios.get("/courses/course-view/");
+    return result;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+export const loadStudentsCourses = async (username) => {
+  try {
+    const result = await coreAxios.get(`/courses/student-courses/${username}`);
     return result;
   } catch (error) {
     return error.response.data;

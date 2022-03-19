@@ -12,6 +12,7 @@ import Welcome from "./pages/Welcome";
 import CourseDetails from "./pages/Courses/CourseDetails";
 import Progrecesses from "./pages/Progresses";
 import CheckProgresses from "./pages/Progresses/CheckProgresses";
+import ProgressDetails from "./pages/Progresses/ProgressDetails";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path='/course/:id' element={<CourseDetails />} />
         <Route path='/check-progresses' element={<CheckProgresses />} />
         <Route path='/progresses/:username' element={<Progrecesses />} />
+        <Route path='/progress-details/:id' element={<ProgressDetails />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/' element={<Welcome />} />
 

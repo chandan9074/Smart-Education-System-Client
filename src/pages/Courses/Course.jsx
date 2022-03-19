@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import courseBg from "../../assets/Images/course.png";
 
-const Course = ({ course }) => {
+const Course = ({ course, linkTo }) => {
   const classes = course?.classes;
   console.log(classes[0].class_sec.section);
   const assignedClasses = [];
@@ -16,9 +16,12 @@ const Course = ({ course }) => {
 
   return (
     <div className='col'>
-      <div className='card bg-white p-2 mx-auto' style={{ width: "17rem" }}>
+      <div
+        className='card bg-white p-2 mx-auto shadow-sm'
+        style={{ width: "17rem" }}
+      >
         <Link
-          to={`/course/${course.id}`}
+          to={`${linkTo}/${course.id}`}
           className='text-decoration-none text-dark'
         >
           <img src={courseBg} className='card-img-top opacity-80' alt='...' />
@@ -45,7 +48,7 @@ const Course = ({ course }) => {
             </a> */}
           </div>
           <img
-            src='https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80'
+            src='https://www.seekpng.com/png/full/72-729756_how-to-add-a-new-user-to-your.png'
             className='w-16 h-16 absolute right-4 top-1/2 rounded-circle border-2'
             alt='instructor'
           />
