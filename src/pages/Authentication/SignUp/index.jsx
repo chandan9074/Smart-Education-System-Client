@@ -57,10 +57,13 @@ const SignUp = () => {
       // API Request
       const data = await handleSignup(userdata);
 
+      console.log(data);
+
       if (data?.status === 201) {
         setUserdata(initialUserData);
         navigate("/verify");
       } else {
+        console.log(data);
         message.error(data?.data.msg);
       }
     } else {
@@ -83,15 +86,12 @@ const SignUp = () => {
     <div className='flex justify-center min-h-screen bg-gray-100 mt-12 px-4 md:px-0'>
       <div className='container my-12 max-w-xl border-2 border-gray-200 p-3 bg-white sm:mx-8 rounded-tl-lg rounded-br-lg'>
         <div className='flex w-11/12 lg:w-full mx-auto my-6'>
-          <Link className='w-full hover:text-black' to={"/signin"}>
-            <div className=' py-2 text-center'>Sign In</div>
-          </Link>
-          <Link
-            className='w-full border-b-4 border-secendary hover:text-black'
-            to={"/signup"}
+          <div className='w-1/3 mx-auto border-b-4 border-secendary text-black'
           >
-            <div className='py-2 text-center'>Sign Up</div>
-          </Link>
+            <div className='text-xl font-semibold py-2 text-center'>
+              SIGN UP
+            </div>
+          </div>
         </div>
 
         <div className='m-6'>

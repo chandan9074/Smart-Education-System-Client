@@ -47,8 +47,15 @@ code {
   transition-timing-function: ease-in-out;
 }
 
-.date-picker{
+.date-picker {
   min-width: 17.5rem !important;
   padding: 0.5rem !important;
   margin-bottom: 2rem !important;
+}
+
+#navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  transition: top 0.3s;
 }

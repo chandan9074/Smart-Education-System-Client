@@ -13,10 +13,21 @@ function NavbarSection() {
     setActiveClass(location.pathname);
   }, [location.pathname, activeClass]);
 
-  
+  var prevScrollpos = window.pageYOffset;
+  window.onscroll = function () {
+    var currentScrollPos = window.pageYOffset;
+    if (prevScrollpos > currentScrollPos) {
+      document.getElementById("navbar").style.top = "0";
+    } else {
+      document.getElementById("navbar").style.top = "-60px";
+    }
+    prevScrollpos = currentScrollPos;
+  };
+
   return (
     <Navbar
-      className='w-screen px-20 py-2.5 color-primary fixed top-0 z-50'
+      id='navbar'
+      className='w-screen px-20 py-2.5 color-primary'
       variant='dark'
       expand='lg'
       style={{ zIndex: "9999" }}

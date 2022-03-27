@@ -4,11 +4,9 @@ import courseBg from "../../assets/Images/course.png";
 
 const Course = ({ course, linkTo }) => {
   const classes = course?.classes;
-  console.log(classes[0].class_sec.section);
   const assignedClasses = [];
 
   course?.classes.forEach((i) => {
-    console.log(i.class_sec.section);
     if (!assignedClasses.includes(i.class_sec.section)) {
       assignedClasses.push(i.class_sec.section);
     }

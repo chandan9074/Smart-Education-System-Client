@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { message } from "antd";
 import { handleSignin } from "../../../services/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   document.title = "S.E.S -Sign In";
 
   const [data, setData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
+
+  const nevigate = useNavigate();
 
   const userData = (e) => {
     const userdata = { ...data };
@@ -22,8 +24,17 @@ const SignIn = () => {
     const responseData = await handleSignin(data);
 
     if (responseData.status === 200) {
-      localStorage.set("User Details", responseData.data);
-      localStorage.set("token", responseData.data.token);
+      console.log(responseData.data);
+      localStorage.setItem("User Details", responseData.data);
+      localStorage.setItem("token", responseData.data.token);
+      nevigate("/");
+      message.success({
+        content: "You have successfully signed in",
+        className: "custom-class",
+        style: {
+          marginTop: "10vh",
+        },
+      });
     } else {
       message.error("Invalid Username or Password.");
     }
@@ -34,13 +45,12 @@ const SignIn = () => {
       <div className='container my-12 max-w-xl border-2 border-gray-200 p-3 bg-white sm:mx-8 rounded-tl-lg rounded-br-lg'>
         <div className='flex w-11/12 lg:w-full mx-auto my-6'>
           <Link
-            className='w-full border-b-4 border-secendary hover:text-black'
-            to={"/signin"}
+            className='w-1/3 mx-auto border-b-4 border-secendary text-black '
+            to={"/signup"}
           >
-            <div className=' py-2 text-center'>Sign In</div>
-          </Link>
-          <Link className='w-full hover:text-black' to={"/signup"}>
-            <div className='py-2 text-center'>Sign Up</div>
+            <div className='text-xl font-semibold py-2 text-center'>
+              SIGN IN
+            </div>
           </Link>
         </div>
 
@@ -56,13 +66,14 @@ const SignIn = () => {
                 htmlFor='email'
                 className='block mb-2 text-sm text-gray-600 dark:text-gray-400'
               >
-                Username
+                Institution ID
               </label>
               <input
                 type='text'
                 name='username'
                 id='username'
-                placeholder='Enter Your Username'
+                title='Sign in with yor institute id number'
+                placeholder='Enter Your Institution ID'
                 className='w-full px-3 py-2 placeholder-gray-600 border bg-gray-100 rounded-md focus:outline-none focus:ring focus:ring-gray-200 focus:border-gray-300'
                 required
                 onChange={(e) => {
