@@ -53,6 +53,20 @@ code {
   margin-bottom: 2rem !important;
 }
 
+.signup-date-picker {
+  min-width: 15rem !important;
+  padding: 0.5rem !important;
+  margin-bottom: 2rem !important;
+}
+
+.signup-input-bg {
+  background-color: rgb(243 244 246) !important;
+}
+
+.password-field{
+  background-color: rgba(243, 244, 246,1) !important;
+}
+
 #navbar {
   position: fixed;
   top: 0;
