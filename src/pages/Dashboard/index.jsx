@@ -6,6 +6,8 @@ const Dashboard = () => {
   document.title = "Dashboard -All Courses";
 
   const [courses, setCourses] = useState([]);
+  const [searchCourses, setSearchCourses] = useState([]);
+  const [ToggleSearch, setToggleSearch] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -14,8 +16,19 @@ const Dashboard = () => {
         setCourses(classwiseCourses.data);
       }
     })();
-  }, []);
+  }, [ToggleSearch]);
 
+  const handleSearchCourse = (e) => {
+    if (e.target.value === "") {
+      setToggleSearch(!ToggleSearch);
+    } else {
+      setCourses(
+        courses.filter((course) =>
+          course.title.toLowerCase().includes(e.target.value.toLowerCase())
+        )
+      );
+    }
+  };
 
   return (
     <div>
@@ -26,6 +39,9 @@ const Dashboard = () => {
             className='form-control'
             placeholder='search with course name'
             aria-describedby='button-addon2'
+            onChange={(e) => {
+              handleSearchCourse(e);
+            }}
           />
           <button
             className='btn btn-outline color-secendary mx-2 '
