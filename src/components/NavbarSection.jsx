@@ -60,62 +60,99 @@ function NavbarSection() {
       expand='lg'
       style={{ zIndex: "999" }}
     >
-      <Navbar.Brand className='font-medium text-xl text-white' href='#'>
-        S.E.S
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls='navbarScroll' />
-      <Navbar.Collapse id='navbarScroll'>
-        <Nav
-          className='ml-auto my-2 pl-16 my-lg-0'
-          style={{ maxHeight: "100px" }}
-          navbarScroll
-        >
-          {JSON.parse(localStorage.getItem("token")) && (
+      <div className='w-full md:w-4/12 flex justify-between items-center'>
+        <Navbar.Brand className='font-medium text-xl text-white' href='#'>
+          S.E.S
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls='navbarScroll' />
+      </div>
+      <Navbar.Collapse
+        id='navbarScroll'
+        className='md:w-9/12 md:flex justify-between items-center'
+      >
+        <div>
+          <Nav
+            className='ml-auto my-2 pl-16 my-lg-0'
+            style={{ maxHeight: "100px" }}
+            navbarScroll
+          >
+            {JSON.parse(localStorage.getItem("token")) && (
+              <p
+                className={`${
+                  activeClass === "/dashboard" ? `text-secendary` : `text-white`
+                } font-semibold text-md my-auto mx-3 cursor-pointer`}
+                onClick={() => {
+                  setActiveClass("/dashboard");
+                  navigator("/dashboard");
+                }}
+              >
+                Dashboard
+              </p>
+            )}
             <p
               className={`${
-                activeClass === "/dashboard" ? `text-secendary` : `text-white`
+                (activeClass === "/check-progresses") |
+                (activeClass ===
+                  `/progresses/${localStorage.getItem("student")}`)
+                  ? `text-secendary`
+                  : `text-white`
               } font-semibold text-md my-auto mx-3 cursor-pointer`}
               onClick={() => {
-                setActiveClass("/dashboard");
-                navigator("/dashboard");
+                setActiveClass("/check-progresses");
+                navigator("/check-progresses");
               }}
             >
-              Dashboard
+              Progrecesses
             </p>
-          )}
-          <p
-            className={`${
-              (activeClass === "/check-progresses") |
-              (activeClass === `/progresses/${localStorage.getItem("student")}`)
-                ? `text-secendary`
-                : `text-white`
-            } font-semibold text-md my-auto mx-3 cursor-pointer`}
-            onClick={() => {
-              setActiveClass("/check-progresses");
-              navigator("/check-progresses");
-            }}
-          >
-            Progrecesses
-          </p>
-          <p
-            className={`${
-              (activeClass === "/help") | (activeClass === "/help")
-                ? `text-secendary`
-                : `text-white`
-            } font-semibold text-md my-auto mx-3 cursor-pointer`}
-          >
-            Help
-          </p>
-        </Nav>
+            <p
+              className={`${
+                (activeClass === "/help") | (activeClass === "/help")
+                  ? `text-secendary`
+                  : `text-white`
+              } font-semibold text-md my-auto mx-3 cursor-pointer`}
+            >
+              Help
+            </p>
+          </Nav>
+        </div>
         <Nav.Link className='pl-20 text-md text-white'>
           {JSON.parse(localStorage.getItem("User Details"))?.type ? (
-            <Dropdown overlay={menu} placement='bottomRight' arrow>
+            <Dropdown
+              overlay={menu}
+              placement='bottomRight'
+              arrow
+              trigger='[click]'
+            >
               <div>
                 {JSON.parse(localStorage.getItem("User Details"))?.type ===
                 "teacher" ? (
-                  <Icons.Teacher className='w-6' />
+                  <div className='flex items-start'>
+                    <Icons.Teacher className='w-6' />{" "}
+                    <p className='mt-1.5 mb-0 ml-2 font-light'>
+                      {
+                        JSON.parse(localStorage.getItem("User Details"))
+                          ?.first_name
+                      }{" "}
+                      {
+                        JSON.parse(localStorage.getItem("User Details"))
+                          ?.last_name
+                      }
+                    </p>
+                  </div>
                 ) : (
-                  <Icons.Grafuation className='w-6' />
+                  <div className='flex items-start'>
+                    <Icons.Grafuation className='w-6' />
+                    <p className='mt-1.5 mb-0 ml-2 font-light'>
+                      {
+                        JSON.parse(localStorage.getItem("User Details"))
+                          ?.first_name
+                      }{" "}
+                      {
+                        JSON.parse(localStorage.getItem("User Details"))
+                          ?.last_name
+                      }
+                    </p>
+                  </div>
                 )}
               </div>
             </Dropdown>
