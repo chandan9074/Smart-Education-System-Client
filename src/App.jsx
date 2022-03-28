@@ -13,6 +13,7 @@ import CourseDetails from "./pages/Courses/CourseDetails";
 import Progrecesses from "./pages/Progresses";
 import CheckProgresses from "./pages/Progresses/CheckProgresses";
 import ProgressDetails from "./pages/Progresses/ProgressDetails";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -21,12 +22,33 @@ function App() {
       <Routes>
         <Route path='/signup' element={<SignUp />} />
         <Route path='/signin' element={<SignIn />} />
-        <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/course/:id' element={<CourseDetails />} />
+        <Route
+          path='/dashboard'
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/course/:id'
+          element={
+            <PrivateRoute>
+              <CourseDetails />
+            </PrivateRoute>
+          }
+        />
         <Route path='/check-progresses' element={<CheckProgresses />} />
         <Route path='/progresses/:username' element={<Progrecesses />} />
         <Route path='/progress-details/:id' element={<ProgressDetails />} />
-        <Route path='/profile' element={<Profile />} />
+        <Route
+          path='/profile'
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        />
         <Route path='/' element={<Welcome />} />
 
         <Route path='*' element={<PageNotFound />} />

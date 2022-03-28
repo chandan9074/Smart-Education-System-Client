@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { message } from "antd";
+import { Input, message } from "antd";
 import { handleSignin } from "../../../services/auth";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -23,11 +23,11 @@ const SignIn = () => {
 
     const responseData = await handleSignin(data);
 
+    console.log(responseData.data);
     if (responseData.status === 200) {
-      console.log(responseData.data);
-      localStorage.setItem("User Details", responseData.data);
-      localStorage.setItem("token", responseData.data.token);
-      nevigate("/");
+      localStorage.setItem("User Details", JSON.stringify(responseData.data));
+      localStorage.setItem("token", JSON.stringify(responseData.data.token));
+      nevigate("/dashboard");
       message.success({
         content: "You have successfully signed in",
         className: "custom-class",
@@ -36,14 +36,23 @@ const SignIn = () => {
         },
       });
     } else {
-      message.error("Invalid Username or Password.");
+      message.error({
+        content: "Invalid Username or Password.",
+        className: "custom-class",
+        style: {
+          marginTop: "10vh",
+        },
+      });
     }
   };
+
+  console.log(data);
 
   return (
     <div className='flex justify-center md:min-h-screen bg-gray-100 mt-12 px-4 md:px-0'>
       <div className='container my-12 max-w-xl border-2 border-gray-200 p-3 bg-white sm:mx-8 rounded-tl-lg rounded-br-lg'>
         <div className='flex w-11/12 lg:w-full mx-auto my-6'>
+<<<<<<< HEAD
           <Link
             className='w-1/3 mx-auto border-b-4 border-secendary text-black '
             to={"/signup"}
@@ -52,6 +61,13 @@ const SignIn = () => {
               SIGN IN
             </div>
           </Link>
+=======
+          <div className='w-1/3 mx-auto border-b-4 border-secendary text-black'>
+            <div className='text-xl font-semibold py-2 text-center'>
+              SIGN IN
+            </div>
+          </div>
+>>>>>>> 08a571221774881fbe1234129eb1ca88279cf56c
         </div>
 
         <div className='m-6'>
@@ -96,12 +112,12 @@ const SignIn = () => {
                   Forgot password?
                 </a>
               </div>
-              <input
+              <Input.Password
                 type='password'
                 name='password'
                 id='password'
                 placeholder='Enter Your password'
-                className='w-full px-3 py-2 placeholder-gray-600 border bg-gray-100 border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-gray-200 focus:border-gray-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500'
+                className='w-full password-field px-3 py-2 placeholder-gray-600 border bg-gray-100 border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-gray-200 focus:border-gray-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500'
                 required
                 onChange={(e) => {
                   userData(e);

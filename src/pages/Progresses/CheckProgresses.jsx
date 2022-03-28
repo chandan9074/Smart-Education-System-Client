@@ -14,9 +14,9 @@ const CheckProgresses = () => {
   });
 
   useEffect(() => {
-    if (localStorage.getItem("student") || localStorage.getItem("token")) {
-      naviator(`/progresses/${localStorage.getItem("student")}`);
-    }
+    // if (localStorage.getItem("student") || localStorage.getItem("token")) {
+    //   naviator(`/progresses/${localStorage.getItem("student")}`);
+    // }
   });
 
   const dateFormat = "YYYY/MM/DD";
@@ -105,7 +105,7 @@ const CheckProgresses = () => {
             className='color-secendary px-6 py-1.5 shadow-sm rounded font-semibold'
             type='submit'
           >
-            Chack
+            Check
           </button>
         </form>
       </div>

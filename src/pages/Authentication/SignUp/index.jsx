@@ -1,17 +1,18 @@
-import { message } from "antd";
+import { Input, DatePicker, message } from "antd";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import zxcvbn from "zxcvbn";
 import { handleSignup } from "../../../services/auth";
+import { Select } from "antd";
 
 const SignUp = () => {
   document.title = "S.E.S -Sign Up";
 
   const navigate = useNavigate();
-
   const [userdata, setUserdata] = useState(initialUserData);
-
   const [passwordChecker, setpasswordChecker] = useState(initialDesign);
+
+  const { Option } = Select;
 
   const loadData = (e) => {
     const data = { ...userdata };
@@ -49,6 +50,10 @@ const SignUp = () => {
   // Handeling form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (userdata.usertype === "") {
+      message.error("Select an user type");
+      return;
+    }
     // Confirm Password mathching Checker
     if (
       userdata.password === userdata.confirm_password &&
@@ -57,10 +62,15 @@ const SignUp = () => {
       // API Request
       const data = await handleSignup(userdata);
 
+      console.log(data);
+
       if (data?.status === 201) {
         setUserdata(initialUserData);
-        navigate("/verify");
+        console.log();
+        message.success("User added successfully");
+        // navigate("/dashboard");
       } else {
+        console.log(data);
         message.error(data?.data.msg);
       }
     } else {
@@ -79,19 +89,36 @@ const SignUp = () => {
       });
     }
   };
+
+  function handleChange(value) {
+    console.log(`selected ${value}`);
+    const inputdata = { ...userdata };
+    inputdata["type"] = value;
+    setUserdata(inputdata);
+  }
+
+  const dateFormat = "YYYY/MM/DD";
+
+  const customFormat = (value) => {
+    console.log(value.format(dateFormat));
+    const data = { ...userdata };
+    data["dob"] = value.format(dateFormat);
+    data["password"] = value.format(dateFormat);
+    data["confirm_password"] = value.format(dateFormat);
+    setUserdata(data);
+  };
+
+  console.log(userdata);
+
   return (
     <div className='flex justify-center min-h-screen bg-gray-100 mt-12 px-4 md:px-0'>
       <div className='container my-12 max-w-xl border-2 border-gray-200 p-3 bg-white sm:mx-8 rounded-tl-lg rounded-br-lg'>
         <div className='flex w-11/12 lg:w-full mx-auto my-6'>
-          <Link className='w-full hover:text-black' to={"/signin"}>
-            <div className=' py-2 text-center'>Sign In</div>
-          </Link>
-          <Link
-            className='w-full border-b-4 border-secendary hover:text-black'
-            to={"/signup"}
-          >
-            <div className='py-2 text-center'>Sign Up</div>
-          </Link>
+          <div className='w-1/3 mx-auto border-b-4 border-secendary text-black'>
+            <div className='text-xl font-semibold py-2 text-center'>
+              SIGN UP
+            </div>
+          </div>
         </div>
 
         <div className='m-6'>
@@ -145,41 +172,84 @@ const SignUp = () => {
                 />
               </div>
             </div>
-            <div className='mb-6'>
-              <label
-                htmlFor='username'
-                className='block mb-2 text-sm text-gray-600 dark:text-gray-400'
-              >
-                Username
-              </label>
-              <input
-                type='text'
-                name='username'
-                id='username'
-                required
-                placeholder='Your Username'
-                className='w-full px-3 py-2 placeholder-gray-600 border bg-gray-100 rounded-md focus:outline-none focus:ring focus:ring-gray-200 focus:border-gray-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500'
-                onChange={(e) => loadData(e)}
-                value={userdata.username}
-              />
+            <div className='flex'>
+              <div className='w-1/2 mr-4'>
+                <label
+                  htmlFor='username'
+                  className='block mb-2 text-sm text-gray-600 dark:text-gray-400'
+                >
+                  Institution ID
+                </label>
+                <input
+                  type='text'
+                  name='username'
+                  id='username'
+                  required
+                  placeholder='Your Institution ID'
+                  className='w-full px-3 py-2 placeholder-gray-600 border bg-gray-100 rounded-md focus:outline-none focus:ring focus:ring-gray-200 focus:border-gray-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500'
+                  onChange={(e) => loadData(e)}
+                  value={userdata.username}
+                />
+              </div>
+              <div className='w-1/2'>
+                <label
+                  htmlFor='dob'
+                  className='block mb-2 text-sm text-gray-600 dark:text-gray-400'
+                >
+                  Date of Birth
+                </label>
+                <DatePicker
+                  id='dob'
+                  className='signup-date-picker signup-input-bg z-0'
+                  placeholder='Date of Birth'
+                  format={dateFormat}
+                  onChange={(e) => {
+                    customFormat(e);
+                  }}
+                />
+              </div>
             </div>
-            <div className='mb-6'>
-              <label
-                htmlFor='email'
-                className='block mb-2 text-sm text-gray-600 dark:text-gray-400'
-              >
-                Email Address
-              </label>
-              <input
-                type='email'
-                name='email'
-                id='email'
-                required
-                placeholder='Your email address'
-                className='w-full px-3 py-2 placeholder-gray-600 border bg-gray-100 rounded-md focus:outline-none focus:ring focus:ring-gray-200 focus:border-gray-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500'
-                onChange={(e) => loadData(e)}
-                value={userdata.email}
-              />
+            <div className='mb-6 flex'>
+              <div className='w-1/2 mr-4'>
+                <label
+                  htmlFor='email'
+                  className='block mb-2 text-sm text-gray-600 dark:text-gray-400'
+                >
+                  Email Address
+                </label>
+                <input
+                  type='email'
+                  name='email'
+                  id='email'
+                  required
+                  placeholder='Your email address'
+                  className='w-full px-3 py-2 placeholder-gray-600 border bg-gray-100 rounded-md focus:outline-none focus:ring focus:ring-gray-200 focus:border-gray-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500'
+                  onChange={(e) => loadData(e)}
+                  value={userdata.email}
+                />
+              </div>
+              <div className='w-1/2'>
+                <label
+                  htmlFor='usertype'
+                  className='block mb-2 text-sm text-gray-600 dark:text-gray-400'
+                >
+                  User Type
+                </label>
+                <Select
+                  id='usertype'
+                  className='w-full border signup-input-bg teat-sm rounded-md'
+                  defaultValue='---'
+                  allowClear
+                  size='large'
+                  aria-required
+                  onChange={handleChange}
+                >
+                  <Option value=''>---</Option>
+                  <Option value='student'>Student</Option>
+                  <Option value='teacher'>Teacher</Option>
+                  <Option value='admin'>Admin</Option>
+                </Select>
+              </div>
             </div>
 
             <div className='flex'>
@@ -192,13 +262,13 @@ const SignUp = () => {
                     Password
                   </label>
                 </div>
-                <input
+                <Input.Password
                   type='password'
                   name='password'
                   id='password'
                   required
                   placeholder='Your password'
-                  className='w-full px-3 py-2 placeholder-gray-600 border bg-gray-100 rounded-md focus:outline-none focus:ring focus:ring-gray-200 focus:border-gray-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500'
+                  className='password-field w-full px-3 py-2 placeholder-gray-600 border bg-gray-100 rounded-md focus:outline-none focus:ring focus:ring-gray-200 focus:border-gray-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500'
                   onChange={(e) => loadData(e)}
                   value={userdata.password}
                 />
@@ -214,13 +284,13 @@ const SignUp = () => {
                     Confirm Password
                   </label>
                 </div>
-                <input
+                <Input.Password
                   type='password'
                   name='confirm_password'
                   id='confirm_password'
                   required
                   placeholder='Confirm Your password'
-                  className='w-full px-3 py-2 placeholder-gray-600 border bg-gray-100 rounded-md focus:outline-none focus:ring focus:ring-gray-200 focus:border-gray-300'
+                  className='password-field w-full px-3 py-2 placeholder-gray-600 border bg-gray-100 rounded-md focus:outline-none focus:ring focus:ring-gray-200 focus:border-gray-300'
                   onChange={(e) => loadData(e)}
                   value={userdata.confirm_password}
                 />
@@ -280,6 +350,8 @@ const initialUserData = {
   username: "",
   email: "",
   password: "",
+  type: "",
+  dob: "",
   confirm_password: "",
 };
 
