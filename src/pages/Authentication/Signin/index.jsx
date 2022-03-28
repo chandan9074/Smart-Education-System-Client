@@ -10,7 +10,6 @@ const SignIn = () => {
   const [error, setError] = useState("");
 
   const nevigate = useNavigate();
-  
 
   const userData = (e) => {
     const userdata = { ...data };
@@ -53,14 +52,11 @@ const SignIn = () => {
     <div className='flex justify-center md:min-h-screen bg-gray-100 mt-12 px-4 md:px-0'>
       <div className='container my-12 max-w-xl border-2 border-gray-200 p-3 bg-white sm:mx-8 rounded-tl-lg rounded-br-lg'>
         <div className='flex w-11/12 lg:w-full mx-auto my-6'>
-          <Link
-            className='w-1/3 mx-auto border-b-4 border-secendary text-black '
-            to={"/signup"}
-          >
+          <div className='w-1/3 mx-auto border-b-4 border-secendary text-black'>
             <div className='text-xl font-semibold py-2 text-center'>
               SIGN IN
             </div>
-          </Link>
+          </div>
         </div>
 
         <div className='m-6'>

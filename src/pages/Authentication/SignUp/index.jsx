@@ -1,4 +1,4 @@
-import { DatePicker, message } from "antd";
+import { Input, DatePicker, message } from "antd";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import zxcvbn from "zxcvbn";
@@ -262,13 +262,13 @@ const SignUp = () => {
                     Password
                   </label>
                 </div>
-                <input
+                <Input.Password
                   type='password'
                   name='password'
                   id='password'
                   required
                   placeholder='Your password'
-                  className='w-full px-3 py-2 placeholder-gray-600 border bg-gray-100 rounded-md focus:outline-none focus:ring focus:ring-gray-200 focus:border-gray-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500'
+                  className='password-field w-full px-3 py-2 placeholder-gray-600 border bg-gray-100 rounded-md focus:outline-none focus:ring focus:ring-gray-200 focus:border-gray-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500'
                   onChange={(e) => loadData(e)}
                   value={userdata.password}
                 />
@@ -284,13 +284,13 @@ const SignUp = () => {
                     Confirm Password
                   </label>
                 </div>
-                <input
+                <Input.Password
                   type='password'
                   name='confirm_password'
                   id='confirm_password'
                   required
                   placeholder='Confirm Your password'
-                  className='w-full px-3 py-2 placeholder-gray-600 border bg-gray-100 rounded-md focus:outline-none focus:ring focus:ring-gray-200 focus:border-gray-300'
+                  className='password-field w-full px-3 py-2 placeholder-gray-600 border bg-gray-100 rounded-md focus:outline-none focus:ring focus:ring-gray-200 focus:border-gray-300'
                   onChange={(e) => loadData(e)}
                   value={userdata.confirm_password}
                 />
