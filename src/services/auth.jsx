@@ -60,3 +60,12 @@ export const loadStudentsCourses = async (username) => {
     return error.response.data;
   }
 };
+
+export const loadProfile = async () => {
+  try {
+    const result = await coreAxios.get('/accounts/profile/');
+    return result;
+  } catch (error) {
+    return error.response.data;
+  }
+};
