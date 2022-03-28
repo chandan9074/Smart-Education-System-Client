@@ -41,7 +41,7 @@ code {
 }
 
 .color-secendary-hover:hover {
-  background-color: #03ef62;
+  background-color: #03ef62 !important;
   transition-property: background-color;
   transition-delay: 0.1s;
   transition-timing-function: ease-in-out;
@@ -63,8 +63,8 @@ code {
   background-color: rgb(243 244 246) !important;
 }
 
-.password-field{
-  background-color: rgba(243, 244, 246,1) !important;
+.password-field {
+  background-color: rgba(243, 244, 246, 1) !important;
 }
 
 #navbar {
