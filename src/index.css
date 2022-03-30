@@ -73,3 +73,7 @@ code {
   width: 100%;
   transition: top 0.3s;
 }
+
+.ant-upload-span .ant-upload-list-item-info {
+  color: #04160b !important;
+}

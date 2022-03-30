@@ -82,7 +82,7 @@ const Homework = () => {
   };
 
   return (
-    <div className='min-h-screen pt-20 mx-4 md:pt-28 md:mx-28'>
+    <div className='min-h-screen pt-20 mx-4 md:pt-28 md:mx-32'>
       <div className=' bg-white px-14 py-16 shadow-sm rounded'>
         <div>
           <h1 className='text-2xl font-medium text-center underline'>
