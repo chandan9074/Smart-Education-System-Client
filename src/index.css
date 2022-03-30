@@ -77,3 +77,7 @@ code {
 .ant-upload-span .ant-upload-list-item-info {
   color: #04160b !important;
 }
+
+.marks-input{
+  width: 65px !important;
+}

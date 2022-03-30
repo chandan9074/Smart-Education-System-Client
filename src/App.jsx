@@ -17,6 +17,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Homework from "./pages/Courses/Homework";
 import AddHomework from "./pages/Courses/Homework/AddHomework";
 import UpdateHomework from "./pages/Courses/Homework/UpdateHomework";
+import EvaluateHomework from "./pages/Courses/Homework/EvaluateHomework";
 
 function App() {
   return (
@@ -76,6 +77,15 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+          path='/evaluate-homework/:id'
+          element={
+            <PrivateRoute>
+              <EvaluateHomework />
+            </PrivateRoute>
+          }
+        />
+
         <Route path='/' element={<Welcome />} />
 
         <Route path='*' element={<PageNotFound />} />

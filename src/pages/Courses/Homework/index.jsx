@@ -4,14 +4,23 @@ import React from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
-import { deleteHomework, loadHomework } from "../../../services/others";
+import {
+  deleteHomework,
+  loadHomework,
+  studentSubmissionHomework,
+  submitHomework,
+} from "../../../services/others";
 import Icons from "../../../components/Icons";
 import { UploadOutlined } from "@ant-design/icons";
 
 const Homework = () => {
   const homeworId = useParams();
   const [homeworkDetails, setHomeworkDetails] = useState({});
+  const [studentHomework, setStudentHomework] = useState({});
   const [userDetails, setUserDetails] = useState({});
+  const [file, setFile] = useState(null);
+  const [answer, setAnswer] = useState("");
+  const [toggleSubmit, setToggleSubmit] = useState(false);
   const navigator = useNavigate();
 
   const { Dragger } = Upload;
@@ -27,22 +36,23 @@ const Homework = () => {
       }
     })();
     setUserDetails(JSON.parse(localStorage.getItem("User Details")));
-  }, []);
+  }, [toggleSubmit]);
+
+  useEffect(() => {
+    (async () => {
+      const homework = await studentSubmissionHomework(homeworId.id);
+
+      if (homework.status === 200) {
+        setStudentHomework(homework.data);
+      } else {
+        console.log(homework);
+      }
+    })();
+  }, [toggleSubmit]);
 
   const props = {
-    name: "file",
-    multiple: true,
-    action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
     onChange(info) {
-      const { status } = info.file;
-      if (status !== "uploading") {
-        console.log(info.file, info.fileList);
-      }
-      if (status === "done") {
-        message.success(`${info.file.name} file uploaded successfully.`);
-      } else if (status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
+      setFile(info.file.originFileObj);
     },
     onDrop(e) {
       console.log("Dropped files", e.dataTransfer.files);
@@ -84,6 +94,39 @@ const Homework = () => {
       </Menu.Item>
     </Menu>
   );
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    var today = new Date();
+    var date =
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
+    var time =
+      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date + " " + time;
+
+    const form_data = new FormData();
+    form_data.append("submission_time", dateTime);
+    form_data.append("submitted_file", file);
+    form_data.append("homework_no", homeworId.id);
+    form_data.append("marks", "");
+    form_data.append("answer", answer);
+    form_data.append("student", parseInt(userDetails.id));
+
+    const homework = await submitHomework(homeworId.id, form_data);
+
+    if (homework.status === 200) {
+      message.success("Homework submitted successfully");
+      setAnswer("");
+      setToggleSubmit(!toggleSubmit);
+    } else {
+      console.log(homework);
+    }
+  };
+  console.log(studentHomework);
 
   return (
     <div className='min-h-screen pt-20 mx-6 md:pt-28 md:mx-32'>
@@ -152,16 +195,25 @@ const Homework = () => {
             <p className='text-lg font-medium'>Submission Details</p>
             {userDetails.type === "student" && (
               <>
-                <div className='bg-gray-50 mb-4'>
-                  <div className='font-medium p-3'>
-                    <span>Submission status: </span>
-                    <span className='ml-4'>Not Submitted </span>
+                {studentHomework?.submitted_file ? (
+                  <div className='bg-green-100 mb-4'>
+                    <div className='font-medium p-3'>
+                      <span>Submission status: </span>
+                      <span className='ml-4'>Submitted </span>
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className='bg-red-50 mb-4'>
+                    <div className='font-medium p-3'>
+                      <span>Submission status: </span>
+                      <span className='ml-4'>Not Submitted </span>
+                    </div>
+                  </div>
+                )}
                 <div className='bg-gray-50 mb-4'>
                   <div className='font-medium p-3'>
                     <span>Marks:</span>
-                    <span className='ml-4'></span>
+                    <span className='ml-4'>{studentHomework?.marks}</span>
                   </div>
                 </div>
               </>
@@ -190,11 +242,19 @@ const Homework = () => {
                         <p className='ant-upload-text'>
                           Click or drag file to this area to upload
                         </p>
-                        <p className='ant-upload-hint'>
-                          Support for a single or bulk upload. Strictly prohibit
-                          from uploading company data or other band files
-                        </p>
                       </Dragger>
+                      {studentHomework?.submitted_file && (
+                        <p className='pt-2'>
+                          <span className='font-medium mr-2'>
+                            Your Submitted file:
+                          </span>
+                          <a href={`${studentHomework?.submitted_file}.pdf`}>
+                            {`${studentHomework?.submitted_file?.slice(
+                              68
+                            )}.pdf`}
+                          </a>
+                        </p>
+                      )}
                     </span>
                   </div>
                   <p className='font-medium p-2'> </p>
@@ -209,15 +269,49 @@ const Homework = () => {
                       cols='30'
                       rows='10'
                       placeholder='Answer'
+                      value={answer}
+                      onChange={(e) => {
+                        setAnswer(e.target.value);
+                      }}
                     ></textarea>
                   </div>
                 </div>
-                <div className='w-full flex justify-center items-center pt-6'>
-                  <button className='mx-auto color-secendary px-6 py-1.5 shadow-sm rounded font-semibold'>
-                    Submit
-                  </button>
-                </div>
+
+                {studentHomework?.submitted_file ? (
+                  <div className='w-full flex justify-center items-center pt-6'>
+                    <button
+                      className='mx-auto color-secendary cursor-not-allowed opacity-80 px-6 py-1.5 shadow-sm rounded font-semibold'
+                      disabled
+                    >
+                      Submitted
+                    </button>
+                  </div>
+                ) : (
+                  <div className='w-full flex justify-center items-center pt-6'>
+                    <button
+                      className='mx-auto color-secendary px-6 py-1.5 shadow-sm rounded font-semibold'
+                      onClick={(e) => {
+                        handleSubmit(e);
+                      }}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                )}
               </>
+            )}
+
+            {userDetails.type === "teacher" && (
+              <div>
+                <Link
+                  to={`/evaluate-homework/${homeworId.id}`}
+                  className='w-full flex justify-center items-center pt-6 text-black'
+                >
+                  <button className='mx-auto color-secendary px-6 py-1.5 shadow-sm rounded font-semibold'>
+                    Evaluate Submissions
+                  </button>
+                </Link>
+              </div>
             )}
           </div>
         </div>

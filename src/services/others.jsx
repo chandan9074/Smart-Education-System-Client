@@ -64,3 +64,50 @@ export const deleteHomework = async (id) => {
     return error.response.data;
   }
 };
+
+export const submitHomework = async (id, data) => {
+  try {
+    const result = await axios.post(
+      `http://127.0.0.1:8000/courses/homework-submission/${id}`,
+      data,
+      {
+        headers: {
+          "content-type": "multipart/form-data",
+          Authorization: `Token ${JSON.parse(localStorage.getItem("token"))}`,
+        },
+      }
+    );
+    return result;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+export const studentSubmissionHomework = async (id) => {
+  try {
+    const result = await coreAxios.get(`/courses/student-submission/${id}`);
+    return result;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+export const loadSubmittedHomeworks = async (id) => {
+  try {
+    const result = await coreAxios.get(`/courses/homework-submission/${id}`);
+    return result;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+export const updateHomeworkMars = async (id, marks) => {
+  try {
+    const result = await coreAxios.put(`/courses/update-marks/${id}`, {
+      marks: marks,
+    });
+    return result;
+  } catch (error) {
+    return error.response.data;
+  }
+};
