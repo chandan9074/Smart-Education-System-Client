@@ -17,6 +17,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Homework from "./pages/Courses/Homework";
 import AddHomework from "./pages/Courses/Homework/AddHomework";
 import UpdateHomework from "./pages/Courses/Homework/UpdateHomework";
+import ContentUpdate from "./pages/Courses/ContentUpdate";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         <Route path='/check-progresses' element={<CheckProgresses />} />
         <Route path='/progresses/:username' element={<Progrecesses />} />
         <Route path='/progress-details/:id' element={<ProgressDetails />} />
+        <Route path='/content-update/:id' element={<ContentUpdate />} />
         <Route
           path='/profile'
           element={
