@@ -21,7 +21,7 @@ code {
 }
 
 .color-secendary {
-  background-color: #03ef62;
+  background-color: #4eeb8a;
 }
 
 .text-primary {
@@ -29,19 +29,19 @@ code {
 }
 
 .text-secendary {
-  color: #03ef62;
+  color: #4eeb8a;
 }
 
 .text-secendary-hover:hover {
-  color: #03ef62;
+  color: #4eeb8a;
 }
 
 .border-secendary {
-  border-color: #03ef62;
+  border-color: #4eeb8a;
 }
 
 .color-secendary-hover:hover {
-  background-color: #03ef62 !important;
+  background-color: #4eeb8a !important;
   transition-property: background-color;
   transition-delay: 0.1s;
   transition-timing-function: ease-in-out;

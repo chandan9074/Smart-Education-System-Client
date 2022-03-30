@@ -14,6 +14,7 @@ import Progrecesses from "./pages/Progresses";
 import CheckProgresses from "./pages/Progresses/CheckProgresses";
 import ProgressDetails from "./pages/Progresses/ProgressDetails";
 import PrivateRoute from "./components/PrivateRoute";
+import Homework from "./pages/Courses/Homework";
 
 function App() {
   return (
@@ -46,6 +47,14 @@ function App() {
           element={
             <PrivateRoute>
               <Profile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/homework/:id'
+          element={
+            <PrivateRoute>
+              <Homework />
             </PrivateRoute>
           }
         />

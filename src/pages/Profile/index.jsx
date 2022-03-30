@@ -38,7 +38,7 @@ const Profile = () => {
   return (
     <>
       <div className='container mb-5 pb-5'>
-        <div className=' mx-auto mt-28'>
+        <div className=' mx-auto pt-28'>
           <div className='main_profile_container w-75 mx-auto bg-white rounded-3 shadow p-5 col-md-offset-4'>
             <div className='d-flex justify-content-between'>
               <div className='flex items-center'>
@@ -126,7 +126,7 @@ const Profile = () => {
             </div>
             <div>
               <Modal
-                title='Basic Modal'
+                title='Update Profile'
                 visible={isModalVisible}
                 onOk={handleSubmit}
                 onCancel={handleCancel}
