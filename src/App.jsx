@@ -16,6 +16,7 @@ import ProgressDetails from "./pages/Progresses/ProgressDetails";
 import PrivateRoute from "./components/PrivateRoute";
 import Homework from "./pages/Courses/Homework";
 import AddHomework from "./pages/Courses/Homework/AddHomework";
+import UpdateHomework from "./pages/Courses/Homework/UpdateHomework";
 
 function App() {
   return (
@@ -64,6 +65,14 @@ function App() {
           element={
             <PrivateRoute>
               <AddHomework />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/update-homework/:id'
+          element={
+            <PrivateRoute>
+              <UpdateHomework />
             </PrivateRoute>
           }
         />

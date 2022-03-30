@@ -1,25 +1,37 @@
-import { InboxOutlined } from "@ant-design/icons";
+import { DeleteOutlined, InboxOutlined } from "@ant-design/icons";
 import { DatePicker, Input, message, Upload } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import { useEffect, useState } from "react";
-import { addHomework } from "../../../services/others";
+import { useNavigate, useParams } from "react-router-dom";
 import "../../../index.css";
-import { useNavigate } from "react-router-dom";
+import { loadSingleHomework, updateHomework } from "../../../services/others";
 
-const AddHomework = () => {
+const UpdateHomework = () => {
   const { Dragger } = Upload;
+  const homeworkId = useParams();
 
   const [homeworkDetails, setHomeworkDetails] = useState(initialData);
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState(null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(JSON.parse(localStorage.getItem("User Details")).type);
     if (
       !(JSON.parse(localStorage.getItem("User Details")).type === "teacher")
     ) {
       navigate("/dashboard");
     }
+
+    (async () => {
+      const homework = await loadSingleHomework(homeworkId.id);
+
+      if (homework.status === 200) {
+        setHomeworkDetails(homework.data);
+      } else {
+        console.log(homework);
+      }
+    })();
   }, []);
 
   const loadData = (e) => {
@@ -55,14 +67,19 @@ const AddHomework = () => {
     form_data.append("due_time", homeworkDetails.due_time.slice(0, 16));
     form_data.append("course_content", homeworkDetails.course_content);
 
-    const homework = await addHomework(form_data);
+    const homework = await updateHomework(homeworkId.id, form_data);
 
     if (homework.status === 200) {
-      message.success("Homework added successfully");
-      setHomeworkDetails(initialData);
+      message.success("Homework updated successfully");
     } else {
       console.log(homework);
     }
+  };
+
+  const handleDeleteFile = () => {
+    const Hwdata = { ...homeworkDetails };
+    Hwdata["file"] = "";
+    setHomeworkDetails(Hwdata);
   };
 
   return (
@@ -133,9 +150,30 @@ const AddHomework = () => {
                       <InboxOutlined />
                     </p>
                     <p className='ant-upload-text'>
-                      Click or drag file to this area to upload
+                      Click or drag file to this area to update file
                     </p>
                   </Dragger>
+                  {homeworkDetails.file && (
+                    <>
+                      <div className='flex justify-between items-center'>
+                        <a href={`${homeworkDetails.file}.pdf`}>
+                          {`${homeworkDetails.file.slice(77)}.pdf`}
+                        </a>
+                        <span
+                          className='cursor-pointer'
+                          onClick={() => {
+                            handleDeleteFile();
+                          }}
+                        >
+                          <DeleteOutlined />
+                        </span>
+                      </div>
+                      <span className="text-xs font-medium text-red-600">
+                        To update file, Firstly remove existing file and upload
+                        new one.
+                      </span>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -147,6 +185,7 @@ const AddHomework = () => {
                   <span className='text-sm font-medium'>Due Date:</span>
                   <span className='ml-4'>
                     <DatePicker showTime onChange={onChange} />
+                    <span className='ml-4'>{homeworkDetails.due_time}</span>
                   </span>
                 </div>
                 <p className='font-medium p-2'> </p>
@@ -159,7 +198,7 @@ const AddHomework = () => {
                     handleSubmit(e);
                   }}
                 >
-                  Save
+                  Update
                 </button>
               </div>
             </div>
@@ -170,7 +209,7 @@ const AddHomework = () => {
   );
 };
 
-export default AddHomework;
+export default UpdateHomework;
 
 const initialData = {
   title: "",
@@ -178,6 +217,6 @@ const initialData = {
   question: "",
   total_marks: "",
   due_time: "",
-//   file: null,
+  file: "",
   course_content: 3,
 };

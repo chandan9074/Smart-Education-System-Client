@@ -1,19 +1,18 @@
-import { Upload, message, Button } from "antd";
+import { Upload, message, Button, Menu, Dropdown } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
-import { loadHomework } from "../../../services/others";
+import { deleteHomework, loadHomework } from "../../../services/others";
 import Icons from "../../../components/Icons";
 import { UploadOutlined } from "@ant-design/icons";
-
-
 
 const Homework = () => {
   const homeworId = useParams();
   const [homeworkDetails, setHomeworkDetails] = useState({});
   const [userDetails, setUserDetails] = useState({});
+  const navigator = useNavigate();
 
   const { Dragger } = Upload;
 
@@ -50,44 +49,64 @@ const Homework = () => {
     },
   };
 
-  const uploadProps = {
-    // action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-    onChange({ file, fileList }) {
-      if (file.status !== "uploading") {
-        console.log(file, fileList);
-      }
-    },
-    // defaultFileList: [
-    //   {
-    //     uid: "1",
-    //     name: "xxx.png",
-    //     status: "done",
-    //     response: "Server Error 500", // custom error message to show
-    //     url: "http://www.baidu.com/xxx.png",
-    //   },
-    //   {
-    //     uid: "2",
-    //     name: "yyy.png",
-    //     status: "done",
-    //     url: "http://www.baidu.com/yyy.png",
-    //   },
-    //   {
-    //     uid: "3",
-    //     name: "zzz.png",
-    //     status: "error",
-    //     response: "Server Error 500", // custom error message to show
-    //     url: "http://www.baidu.com/zzz.png",
-    //   },
-    // ],
+  // const uploadProps = {
+  //   onChange({ file, fileList }) {
+  //     if (file.status !== "uploading") {
+  //       console.log(file, fileList);
+  //     }
+  //   },
+  // };
+
+  const handleDelete = async () => {
+    const homework = await deleteHomework(homeworId.id);
+    console.log(homework);
+    if (homework.status === 204) {
+      message.success("Deleted successfully");
+      navigator("/dashboard");
+    } else {
+      console.log(homework);
+    }
   };
 
-  return (
-    <div className='min-h-screen pt-20 mx-4 md:pt-28 md:mx-32'>
-      <div className=' bg-white px-14 py-16 shadow-sm rounded'>
+  const menu = (
+    <Menu className='mt-16 z-50' style={{ zIndex: "9999" }}>
+      <Menu.Item key='profile' className='color-secendary-hover'>
+        <Link rel='noopener noreferrer' to={`/update-homework/${homeworId.id}`}>
+          <div className='px-4 font-semibold'>Edit</div>
+        </Link>
+      </Menu.Item>
+      <Menu.Item key='settings' className='color-secendary-hover'>
         <div>
-          <h1 className='text-2xl font-medium text-center underline'>
+          <div className='px-4 font-semibold' onClick={() => handleDelete()}>
+            Delete
+          </div>
+        </div>
+      </Menu.Item>
+    </Menu>
+  );
+
+  return (
+    <div className='min-h-screen pt-20 mx-6 md:pt-28 md:mx-32'>
+      <div className=' bg-white px-8 py-10 md:px-14 md:py-16 shadow-sm rounded'>
+        <div className='relative'>
+          <h1 className='text-2xl font-medium text-center underline pb-10'>
             {homeworkDetails.title}
           </h1>
+
+          {userDetails.type === "teacher" && (
+            <div>
+              <Dropdown
+                overlay={menu}
+                placement='bottomRight'
+                arrow
+                trigger='[click]'
+              >
+                <div className='absolute top-0 right-0 py-2 px-3 rounded-full hover:bg-gray-100 cursor-pointer'>
+                  <Icons.ThreeDot className='w-1' />
+                </div>
+              </Dropdown>
+            </div>
+          )}
         </div>
         <div className='mt-6'>
           <div>
@@ -116,9 +135,7 @@ const Homework = () => {
                   </a>
                 ) : (
                   <div>
-                    <Upload {...uploadProps}>
-                      <Button icon={<UploadOutlined />}>Update</Button>
-                    </Upload>
+                    <span className='font-medium'>File: </span>
                     <a
                       className='text-primary font-semibold my-auto'
                       href={`${homeworkDetails.file}.pdf`}
@@ -131,71 +148,78 @@ const Homework = () => {
               </div>
             )}
           </div>
-          {userDetails.type === "student" && (
-            <div className='mt-4'>
-              <p className='text-lg font-medium'>Submission Details</p>
-              <div className='bg-gray-50 mb-4'>
-                <div className='font-medium p-3'>
-                  <span>Submission status: </span>
-                  <span className='ml-4'>Not Submitted </span>
+          <div className='mt-4'>
+            <p className='text-lg font-medium'>Submission Details</p>
+            {userDetails.type === "student" && (
+              <>
+                <div className='bg-gray-50 mb-4'>
+                  <div className='font-medium p-3'>
+                    <span>Submission status: </span>
+                    <span className='ml-4'>Not Submitted </span>
+                  </div>
                 </div>
-              </div>
-              <div className='bg-gray-50 mb-4'>
-                <div className='font-medium p-3'>
-                  <span>Marks:</span>
-                  <span className='ml-4'></span>
+                <div className='bg-gray-50 mb-4'>
+                  <div className='font-medium p-3'>
+                    <span>Marks:</span>
+                    <span className='ml-4'></span>
+                  </div>
                 </div>
+              </>
+            )}
+
+            <div className='bg-gray-50 mb-4'>
+              <div className='font-medium p-3'>
+                <span>Due Date:</span>
+                <span className='ml-4'>
+                  {`${homeworkDetails.due_time}`.slice(0, 19)}
+                </span>
               </div>
-              <div className='bg-gray-50 mb-4'>
-                <div className='font-medium p-3'>
-                  <span>Due Date:</span>
-                  <span className='ml-4'>
-                    {`${homeworkDetails.due_time}`.slice(0, 19)}
-                  </span>
-                </div>
-                <p className='font-medium p-2'> </p>
-              </div>
-              <div className='bg-green-50 mb-4'>
-                <div className='font-medium p-3'>
-                  <p>Submission File:</p>
-                  <span className='ml-4'>
-                    {/* <input type='file' name='Submission File' id='' /> */}
-                    <Dragger {...props}>
-                      <p className='ant-upload-drag-icon'>
-                        <InboxOutlined />
-                      </p>
-                      <p className='ant-upload-text'>
-                        Click or drag file to this area to upload
-                      </p>
-                      <p className='ant-upload-hint'>
-                        Support for a single or bulk upload. Strictly prohibit
-                        from uploading company data or other band files
-                      </p>
-                    </Dragger>
-                  </span>
-                </div>
-                <p className='font-medium p-2'> </p>
-              </div>
-              <div className='bg-green-50 mb-4'>
-                <div className='font-medium p-3'>
-                  <p>Answer:</p>
-                  <textarea
-                    className='w-full p-4'
-                    name=''
-                    id=''
-                    cols='30'
-                    rows='10'
-                    placeholder='Answer'
-                  ></textarea>
-                </div>
-              </div>
-              <div className='w-full flex justify-center items-center pt-6'>
-                <button className='mx-auto color-secendary px-6 py-1.5 shadow-sm rounded font-semibold'>
-                  Submit
-                </button>
-              </div>
+              <p className='font-medium p-2'> </p>
             </div>
-          )}
+            {userDetails.type === "student" && (
+              <>
+                <div className='bg-green-50 mb-4'>
+                  <div className='font-medium p-3'>
+                    <p>Submission File:</p>
+                    <span className='ml-4'>
+                      {/* <input type='file' name='Submission File' id='' /> */}
+                      <Dragger {...props}>
+                        <p className='ant-upload-drag-icon'>
+                          <InboxOutlined />
+                        </p>
+                        <p className='ant-upload-text'>
+                          Click or drag file to this area to upload
+                        </p>
+                        <p className='ant-upload-hint'>
+                          Support for a single or bulk upload. Strictly prohibit
+                          from uploading company data or other band files
+                        </p>
+                      </Dragger>
+                    </span>
+                  </div>
+                  <p className='font-medium p-2'> </p>
+                </div>
+                <div className='bg-green-50 mb-4'>
+                  <div className='font-medium p-3'>
+                    <p>Answer:</p>
+                    <textarea
+                      className='w-full p-4'
+                      name=''
+                      id=''
+                      cols='30'
+                      rows='10'
+                      placeholder='Answer'
+                    ></textarea>
+                  </div>
+                </div>
+                <div className='w-full flex justify-center items-center pt-6'>
+                  <button className='mx-auto color-secendary px-6 py-1.5 shadow-sm rounded font-semibold'>
+                    Submit
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>
