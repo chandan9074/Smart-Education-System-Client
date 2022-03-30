@@ -20,6 +20,7 @@ const Course = ({ course, linkTo }) => {
       >
         <Link
           to={`${linkTo}/${course.id}`}
+          state={{ courseData: course }}
           className='text-decoration-none text-dark'
         >
           <img src={courseBg} className='card-img-top opacity-80' alt='...' />

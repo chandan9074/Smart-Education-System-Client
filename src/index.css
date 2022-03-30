@@ -21,7 +21,7 @@ code {
 }
 
 .color-secendary {
-  background-color: #03ef62;
+  background-color: #4eeb8a;
 }
 
 .text-primary {
@@ -63,8 +63,8 @@ code {
   background-color: rgb(243 244 246) !important;
 }
 
-.password-field{
-  background-color: rgba(243, 244, 246,1) !important;
+.password-field {
+  background-color: rgba(243, 244, 246, 1) !important;
 }
 
 #navbar {

@@ -14,6 +14,7 @@ import Progrecesses from "./pages/Progresses";
 import CheckProgresses from "./pages/Progresses/CheckProgresses";
 import ProgressDetails from "./pages/Progresses/ProgressDetails";
 import PrivateRoute from "./components/PrivateRoute";
+import ContentUpdate from "./pages/Courses/ContentUpdate";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
         <Route path='/check-progresses' element={<CheckProgresses />} />
         <Route path='/progresses/:username' element={<Progrecesses />} />
         <Route path='/progress-details/:id' element={<ProgressDetails />} />
+        <Route path='/content-update/:id' element={<ContentUpdate />} />
         <Route
           path='/profile'
           element={
