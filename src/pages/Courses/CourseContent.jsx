@@ -1,13 +1,14 @@
 import { Accordion } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Dropdown, Menu } from "antd";
-import { loadContentsVideo, loadContentsFile, deleteCourseContent } from "../../services/auth";
+import { loadContentsVideo, loadContentsFile, deleteCourseContent, loadStudentsContentHomework } from "../../services/auth";
 import { useState, useEffect } from "react";
 
 const CourseContent = ({content, onFetchData}) => {
 
   const [videos, setVideos] = useState([]);
   const [files, setFiles] = useState([]);
+  const [homework, setHomework] = useState([])
 
   useEffect(()=>{
     const fetchData = async () =>{
@@ -15,6 +16,9 @@ const CourseContent = ({content, onFetchData}) => {
       setVideos(videores.data);
       const filesres = await loadContentsFile(content.id);
       setFiles(filesres.data);
+      const hwres = await loadStudentsContentHomework(content.id);
+      setHomework(hwres.data);
+      console.log("homw", hwres.data);
     }
     fetchData();
 
@@ -94,6 +98,9 @@ const CourseContent = ({content, onFetchData}) => {
                 ))}
                 <li className='text-lg font-medium my-4'>Quiz</li>
                 <li className='text-lg font-medium my-4'>Homework</li>
+                {homework && homework.map((item, index)=>(
+                  <Link to={`/homework/${item.id}`}>Homework - {index+1}</Link>
+                ))}
               </ul>
             </div>
           </div>

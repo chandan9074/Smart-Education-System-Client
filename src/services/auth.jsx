@@ -62,6 +62,15 @@ export const loadStudentsCourses = async (username) => {
   }
 };
 
+export const loadStudentsContentHomework = async (id) => {
+  try {
+    const result = await coreAxios.get(`/courses/homework-details-by-content/${id}`);
+    return result;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
 export const loadProfile = async () => {
   try {
     const result = await coreAxios.get('/accounts/profile/');
