@@ -17,11 +17,8 @@ import PrivateRoute from "./components/PrivateRoute";
 import Homework from "./pages/Courses/Homework";
 import AddHomework from "./pages/Courses/Homework/AddHomework";
 import UpdateHomework from "./pages/Courses/Homework/UpdateHomework";
-<<<<<<< HEAD
 import EvaluateHomework from "./pages/Courses/Homework/EvaluateHomework";
-=======
 import ContentUpdate from "./pages/Courses/ContentUpdate";
->>>>>>> 9dee50cb1aba420fede71c3ca9b73d74ecb0ed1e
 
 function App() {
   return (

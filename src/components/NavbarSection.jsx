@@ -33,7 +33,7 @@ function NavbarSection() {
         </Link>
       </Menu.Item>
       <Menu.Item key='settings' className='color-secendary-hover'>
-        <Link rel='noopener noreferrer' to='https://www.aliyun.com'>
+        <Link rel='noopener noreferrer' to='/'>
           <div className='px-4 font-semibold'>Setttings</div>
         </Link>
       </Menu.Item>
@@ -169,7 +169,7 @@ function NavbarSection() {
               >
                 Sign In
               </p>
-              <p
+              {/* <p
                 className={`${
                   activeClass === "/signup" ? `text-secendary` : `text-white`
                 } font-semibold text-md my-auto mx-3 cursor-pointer`}
@@ -179,7 +179,7 @@ function NavbarSection() {
                 }}
               >
                 Sign Up
-              </p>
+              </p> */}
             </div>
           )}
         </Nav.Link>

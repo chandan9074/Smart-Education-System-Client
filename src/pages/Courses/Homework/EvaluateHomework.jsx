@@ -71,8 +71,8 @@ const EvaluateHomework = () => {
               <div key={hw.id}>
                 <div className='flex flex-col md:flex-row justify-between items-center w-11/12 lg:w-full mx-auto px-10 py-4 rounded-md shadow-md my-10 bg-green-500 bg-opacity-20'>
                   <div className='md:w-full flex flex-col md:flex-row flex-wrap justify-between items-center'>
-                    <p className='w-1/6 text-center'>{index + 1}</p>
-                    <div className='w-1/6 font-semibold text-center text-yellow-700 text-opacity-80 hover:text-yellow-700 hover:text-opacity-70'>
+                    <p className='w-1/6 text-center text-base font-semibold my-auto'>{index + 1}</p>
+                    <div className='w-1/6 font-semibold text-center text-black hover:text-opacity-70'>
                       {hw?.student?.user?.username}
                     </div>
                     <div className='w-1/6'>

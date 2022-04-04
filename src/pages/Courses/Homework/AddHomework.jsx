@@ -4,10 +4,23 @@ import TextArea from "antd/lib/input/TextArea";
 import { useEffect, useState } from "react";
 import { addHomework } from "../../../services/others";
 import "../../../index.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 const AddHomework = () => {
   const { Dragger } = Upload;
+  const [searchParams] = useSearchParams();
+
+  console.log(searchParams.get("c"));
+
+  const initialData = {
+    title: "",
+    instruction: "",
+    question: "",
+    total_marks: "",
+    due_time: "",
+    //   file: null,
+    course_content: searchParams.get("c"),
+  };
 
   const [homeworkDetails, setHomeworkDetails] = useState(initialData);
   const [file, setFile] = useState("");
@@ -171,13 +184,3 @@ const AddHomework = () => {
 };
 
 export default AddHomework;
-
-const initialData = {
-  title: "",
-  instruction: "",
-  question: "",
-  total_marks: "",
-  due_time: "",
-//   file: null,
-  course_content: 3,
-};
