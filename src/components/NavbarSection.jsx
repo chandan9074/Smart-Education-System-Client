@@ -67,6 +67,20 @@ function NavbarSection() {
           >
             Progrecesses
           </p>
+          <p
+            className={`${
+              (activeClass === "/payment") |
+              (activeClass === `/progresses/${localStorage.getItem("student")}`)
+                ? `text-secendary`
+                : `text-white`
+            } font-semibold text-md my-auto mx-3 cursor-pointer`}
+            onClick={() => {
+              setActiveClass("/payment");
+              navigator("/payment");
+            }}
+          >
+            Payment
+          </p>
         </Nav>
         <Nav.Link className='pl-20 text-md text-white'>
           <Icons.Grafuation className='w-6 ' />
