@@ -22,7 +22,6 @@ const CheckProgresses = () => {
   const dateFormat = "YYYY/MM/DD";
 
   const customFormat = (value) => {
-    console.log(value.format(dateFormat));
     const data = { ...studentInfo };
     data["dob"] = value.format(dateFormat);
     setStudentInfo(data);
@@ -36,8 +35,8 @@ const CheckProgresses = () => {
 
   const handleStudentInfoSubmit = async (e) => {
     e.preventDefault();
-    const athenticate = await handleAuthenticateStudent(studentInfo);
-    if (athenticate.status === 200) {
+    const authenticate = await handleAuthenticateStudent(studentInfo);
+    if (authenticate.status === 200) {
       message.success({
         content: "Student's information Matched",
         className: "custom-class",
@@ -45,8 +44,11 @@ const CheckProgresses = () => {
           marginTop: "10vh",
         },
       });
-      localStorage.setItem("student", athenticate.data?.username);
-      naviator(`/progresses/${athenticate.data?.username}`);
+      localStorage.setItem(
+        "student",
+        JSON.stringify(authenticate.data)
+      );
+      naviator(`/progresses/${authenticate.data?.username}`);
     } else {
       message.error({
         content: "Wrong ID or Date of Birth",

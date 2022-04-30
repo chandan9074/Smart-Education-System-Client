@@ -74,6 +74,8 @@ const Progrecesses = () => {
           />
         </div>
       </div>
+
+      {/* Progress of individual courses */}
       <div className='container p-8 bg-white rounded shadow-sm'>
         <div className='relative mb-10'>
           <h1 className='text-center text-2xl mb-6'>Courses</h1>

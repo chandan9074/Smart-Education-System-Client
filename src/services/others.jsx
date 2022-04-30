@@ -111,3 +111,13 @@ export const updateHomeworkMars = async (id, marks) => {
     return error.response.data;
   }
 };
+
+
+export const coursewiseHomeworkProgresses = async (username) => {
+  try {
+    const result = await coreAxios.get(`/courses/homework-results/${username}`);
+    return result;
+  } catch (error) {
+    return error.response.data;
+  }
+};
