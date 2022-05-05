@@ -14,10 +14,11 @@ const CheckProgresses = () => {
   });
 
   useEffect(() => {
-    // if (localStorage.getItem("student") || localStorage.getItem("token")) {
-    //   naviator(`/progresses/${localStorage.getItem("student")}`);
-    // }
-  });
+    if (localStorage.getItem("student")) {
+      const user = JSON.parse(localStorage.getItem("student"));
+      naviator(`/progresses/${user.username}`);
+    }
+  }, []);
 
   const dateFormat = "YYYY/MM/DD";
 
@@ -44,10 +45,7 @@ const CheckProgresses = () => {
           marginTop: "10vh",
         },
       });
-      localStorage.setItem(
-        "student",
-        JSON.stringify(authenticate.data)
-      );
+      localStorage.setItem("student", JSON.stringify(authenticate.data));
       naviator(`/progresses/${authenticate.data?.username}`);
     } else {
       message.error({

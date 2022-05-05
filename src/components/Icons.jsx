@@ -4,6 +4,7 @@ import { ReactComponent as Plus } from "../assets/Icons/plus.svg";
 import { ReactComponent as IButton } from "../assets/Icons/ibutton.svg";
 import { ReactComponent as DownArrow } from "../assets/Icons/down-arrow.svg";
 import { ReactComponent as ThreeDot } from "../assets/Icons/3-vertical-dots.svg";
+import { ReactComponent as BackArrow } from "../assets/Icons/backArrow.svg";
 
 const Icons = {
   Grafuation,
@@ -11,7 +12,8 @@ const Icons = {
   IButton,
   Teacher,
   DownArrow,
-  ThreeDot
+  ThreeDot,
+  BackArrow,
 };
 
 export default Icons;

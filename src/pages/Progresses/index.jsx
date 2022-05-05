@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Icons from "../../components/Icons";
 import {
   loadStudentsCourses,
@@ -9,20 +9,25 @@ import {
 import Course from "../Courses/Course";
 
 const Progrecesses = () => {
+  const naviator = useNavigate();
   const student = useParams();
   const [yearlyResults, setYearlyResults] = useState([]);
   const [studentsCourses, setStudentsCourses] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const yresults = await loadStudentsYearlyResult(student.username);
-      if (yresults.data) {
-        setYearlyResults(yresults.data);
-      }
+      if (JSON.parse(localStorage.getItem("student"))?.username) {
+        const yresults = await loadStudentsYearlyResult(student.username);
+        if (yresults.data) {
+          setYearlyResults(yresults.data);
+        }
 
-      const studentsCourses = await loadStudentsCourses(student.username);
-      if (studentsCourses?.status === 200) {
-        setStudentsCourses(studentsCourses.data);
+        const studentsCourses = await loadStudentsCourses(student.username);
+        if (studentsCourses?.status === 200) {
+          setStudentsCourses(studentsCourses.data);
+        }
+      } else {
+        naviator("/check-progresses");
       }
     })();
   }, [student.username]);
@@ -52,8 +57,21 @@ const Progrecesses = () => {
     },
   };
 
+  const handleExit = () => {
+    localStorage.removeItem("student");
+    naviator("/check-progresses");
+  };
+
   return (
     <div className='min-h-screen pt-16'>
+      <div className='m-8'>
+        <div className='w-10 color-secendary rounded-full'>
+          <Icons.BackArrow
+            className='p-2 cursor-pointer'
+            onClick={handleExit}
+          />
+        </div>
+      </div>
       <div className='container my-8 p-8 bg-white rounded shadow-sm'>
         <div className='relative'>
           <h1 className='text-center text-2xl mb-6'>Classwise Results</h1>

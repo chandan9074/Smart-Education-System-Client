@@ -14,7 +14,6 @@ const ProgressDetails = () => {
       const resultResp = await coursewiseHomeworkProgresses(
         JSON.parse(localStorage.getItem("student"))?.username
       );
-      console.log(resultResp.data);
       if (resultResp.data) {
         setHomeworkResult(resultResp.data);
       }
@@ -22,7 +21,7 @@ const ProgressDetails = () => {
   }, [courseId?.id]);
 
   const data = [["homework", "Result", "Total Marks"]];
-  homeworkResult.map((res, index) => {
+  homeworkResult.map((res) => {
     if (
       res?.homework_no?.course_content?.courses?.id === parseInt(courseId.id)
     ) {
@@ -57,7 +56,6 @@ const ProgressDetails = () => {
     enableInteractivity: false,
   };
 
-  console.log(homeworkResult);
 
   return (
     <div className='pt-24'>
