@@ -78,7 +78,7 @@ const Progrecesses = () => {
           <div>
             <Icons.IButton
               className='w-4 absolute -top-2 right-2'
-              title='These are classise yearly results'
+              title='These are classwise yearly results'
             />
           </div>
         </div>
