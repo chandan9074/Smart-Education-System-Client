@@ -33,6 +33,26 @@ export const handleAuthenticateStudent = async (studentInfo) => {
   }
 };
 
+export const loadUserData = async (username) => {
+  try {
+    const result = await coreAxios.get(
+      `/accounts/user/${username}`
+    );
+    return result;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+export const loadUserClassData = async (username) => {
+  try {
+    const result = await coreAxios.get(
+      `/courses/class-details-by-student/${username}`
+    );
+    return result;
+  } catch (error) {
+    return error.response.data;
+  }
+};
 export const loadStudentsYearlyResult = async (username) => {
   try {
     const result = await coreAxios.get(

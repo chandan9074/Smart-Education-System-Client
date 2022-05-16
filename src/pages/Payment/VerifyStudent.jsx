@@ -40,8 +40,8 @@ const VerifyStudent = () => {
           marginTop: "10vh",
         },
       });
-      localStorage.setItem("student", athenticate.data?.username);
-      naviator(`/progresses/${athenticate.data?.username}`);
+      // localStorage.setItem("student", athenticate.data?.username);
+      naviator(`/payment/${athenticate.data?.username}`);
     } else {
       message.error({
         content: "Wrong ID or Date of Birth",
@@ -76,7 +76,7 @@ const VerifyStudent = () => {
           <Input
             required
             className='mb-4 px-8 py-2 bg-white'
-            placeholder='Enter student ID'
+            placeholder='Enter student id'
             id='username'
             onChange={(e) => loadStudentInfo(e)}
             prefix={<UserOutlined className='site-form-item-icon pr-2' />}
