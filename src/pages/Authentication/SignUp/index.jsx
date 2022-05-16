@@ -6,7 +6,7 @@ import { handleSignup } from "../../../services/auth";
 import { Select } from "antd";
 
 const SignUp = () => {
-  document.title = "S.E.S -Sign Up";
+  document.title = "SES -Sign Up";
 
   const navigate = useNavigate();
   const [userdata, setUserdata] = useState(initialUserData);

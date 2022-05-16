@@ -59,7 +59,7 @@ const Footer = () => {
         </div>
       </div>
       <h6 className='text-white text-center bg_lightgreen pb-4 py-4 font-light'>
-        S.E.S ©2022. All rights reserved to S.E.S
+        SES©2022. All rights reserved to SES
       </h6>
     </div>
   );

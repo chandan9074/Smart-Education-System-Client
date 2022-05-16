@@ -4,6 +4,7 @@ import { Nav, Navbar } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../index.css";
 import Icons from "./Icons";
+import logo from "../assets/Images/ses_logo.png";
 
 function NavbarSection() {
   const [activeClass, setActiveClass] = useState("");
@@ -65,7 +66,7 @@ function NavbarSection() {
     >
       <div className='w-full md:w-4/12 flex justify-between items-center'>
         <Navbar.Brand className='font-medium text-xl text-white' href='#'>
-          S.E.S
+          <img className='w-8' src={logo} alt='' />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='navbarScroll' />
       </div>
@@ -107,7 +108,7 @@ function NavbarSection() {
             >
               Progrecesses
             </p>
-            {userData?.type === "teacher" && (
+            {userData?.type === "teacher" ? (
               <a
                 className={`${
                   (activeClass === "/create_class") |
@@ -120,7 +121,24 @@ function NavbarSection() {
               >
                 Create Class
               </a>
+            ) : (
+              <p
+                className={`${
+                  (activeClass === "/payment") |
+                  (activeClass ===
+                    `/progresses/${localStorage.getItem("student")}`)
+                    ? `text-secendary`
+                    : `text-white`
+                } font-semibold text-md my-auto mx-3 cursor-pointer`}
+                onClick={() => {
+                  setActiveClass("/payment");
+                  navigator("/payment");
+                }}
+              >
+                Payment
+              </p>
             )}
+
             <p
               className={`${
                 (activeClass === "/help") | (activeClass === "/help")

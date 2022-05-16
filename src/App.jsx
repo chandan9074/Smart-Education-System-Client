@@ -19,6 +19,10 @@ import AddHomework from "./pages/Courses/Homework/AddHomework";
 import UpdateHomework from "./pages/Courses/Homework/UpdateHomework";
 import EvaluateHomework from "./pages/Courses/Homework/EvaluateHomework";
 import ContentUpdate from "./pages/Courses/ContentUpdate";
+import VerifyStudent from "./pages/Payment/VerifyStudent";
+import Payment from "./pages/Payment";
+import Success from "./pages/Payment/Success";
+
 
 function App() {
   return (
@@ -47,6 +51,9 @@ function App() {
         <Route path='/progresses/:username' element={<Progrecesses />} />
         <Route path='/progress-details/:id' element={<ProgressDetails />} />
         <Route path='/content-update/:id' element={<ContentUpdate />} />
+        <Route path='/payment' element={<VerifyStudent />} />
+        <Route path='/payment/:username' element={<Payment />} />
+        <Route path='/payment/success' element={<Success />} />
         <Route
           path='/profile'
           element={

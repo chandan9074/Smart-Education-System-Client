@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { handleSignin } from "../../../services/auth";
 
 const SignIn = () => {
-  document.title = "S.E.S -Sign In";
+  document.title = "SES -Sign In";
 
   const [data, setData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
