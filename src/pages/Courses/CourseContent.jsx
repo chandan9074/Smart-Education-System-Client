@@ -28,7 +28,6 @@ const CourseContent = ({
       setFiles(filesres.data);
       const hwres = await loadStudentsContentHomework(content.id);
       setHomework(hwres.data);
-      console.log("homw", hwres);
     };
     fetchData();
   }, []);
@@ -99,7 +98,7 @@ const CourseContent = ({
               <h5 className='text-lg font-medium my-4 list-item'>
                 Importent Links
               </h5>
-              <a href={`${content.links}.pdf`} target='_blank'>
+              <a href={`${content.links}`} target='_blank'>
                 {content.links}
               </a>
             </div>
@@ -115,12 +114,14 @@ const CourseContent = ({
                 <li className='text-lg font-medium my-4'>Quiz</li>
                 <div className='flex items-center'>
                   <li className='text-lg font-medium my-4'>Homework</li>
-                  <Link
-                    className='ml-4 text-2xl font-bold'
-                    to={`/add-homework/?c=${content.id}`}
-                  >
-                    +
-                  </Link>
+                  {userData.type ==="teacher" && (
+                      <Link
+                        className='ml-4 text-2xl font-bold'
+                        to={`/add-homework/?c=${content.id}`}
+                      >
+                        +
+                      </Link>
+                    )}
                 </div>
                 {homework &&
                   homework.map((item, index) => (

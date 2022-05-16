@@ -1,17 +1,20 @@
+import { Dropdown, Menu } from "antd";
 import { useEffect, useState } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../index.css";
 import Icons from "./Icons";
-import { Menu, Dropdown, Button } from "antd";
 
 function NavbarSection() {
   const [activeClass, setActiveClass] = useState("");
+  const [userData, setUserData] = useState({});
+
   const navigator = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
     setActiveClass(location.pathname);
+    setUserData(JSON.parse(localStorage.getItem("User Details")));
   }, [location.pathname, activeClass]);
 
   var prevScrollpos = window.pageYOffset;
@@ -104,6 +107,20 @@ function NavbarSection() {
             >
               Progrecesses
             </p>
+            {userData?.type === "teacher" && (
+              <a
+                className={`${
+                  (activeClass === "/create_class") |
+                  (activeClass === "/create_class")
+                    ? `text-secendary`
+                    : `text-white`
+                } font-semibold text-md my-auto mx-3 cursor-pointer`}
+                href='http://localhost:3001/'
+                target='_blank'
+              >
+                Create Class
+              </a>
+            )}
             <p
               className={`${
                 (activeClass === "/help") | (activeClass === "/help")
@@ -169,17 +186,6 @@ function NavbarSection() {
               >
                 Sign In
               </p>
-              {/* <p
-                className={`${
-                  activeClass === "/signup" ? `text-secendary` : `text-white`
-                } font-semibold text-md my-auto mx-3 cursor-pointer`}
-                onClick={() => {
-                  setActiveClass("/signup");
-                  navigator("/signup");
-                }}
-              >
-                Sign Up
-              </p> */}
             </div>
           )}
         </Nav.Link>

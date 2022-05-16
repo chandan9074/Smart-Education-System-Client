@@ -288,18 +288,22 @@ const CourseDetails = () => {
       </section>
 
       <section className='container mb-5 '>
-        <Accordion>
-          {contents?.map((content, index) => (
-            <Accordion.Item className='my-4 shadow-sm' eventKey={index}>
-              <CourseContent
-                content={content}
-                userData={userData}
-                handleContentDelete={handleContentDelete}
-                onFetchData={fetchData}
-              />
-            </Accordion.Item>
-          ))}
-        </Accordion>
+        {contents?.length ? (
+          <Accordion>
+            {contents?.map((content, index) => (
+              <Accordion.Item className='my-4 shadow-sm' eventKey={index}>
+                <CourseContent
+                  content={content}
+                  userData={userData}
+                  handleContentDelete={handleContentDelete}
+                  onFetchData={fetchData}
+                />
+              </Accordion.Item>
+            ))}
+          </Accordion>
+        ) : (
+          <h2 className='text-xl text-center'>No contents added yet</h2>
+        )}
       </section>
     </div>
   );
