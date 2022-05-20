@@ -42,7 +42,7 @@ const Payment = () => {
     "November",
     "December",
   ];
-  const otherFee = ["Registration", "Half Yearly", "Air Final", "Extra"];
+  const otherFee = ["Registration", "Half Yearly", "Year Final", "Extra Fees"];
 
   const childrenMonths = [];
   const childrenOthers = [];
@@ -123,10 +123,10 @@ const Payment = () => {
     fetchData();
   }, [username]);
   return (
-    <div className='pt-20 container mx-auto'>
+    <div className='pt-28 container mx-auto'>
       <div>
         <h1 className='text-xl font-semibold'>Students Information</h1>
-        <div className='mt-3 w-full rounded-xl border border-gray-700 grid grid-cols-12'>
+        <div className='mt-3 w-full rounded-xl border border-gray-700 grid grid-cols-12 shadow-sm bg-white bg-opacity-80'>
           <div className='flex flex-col p-4 border-r col-span-3'>
             <label>Name</label>
             <input

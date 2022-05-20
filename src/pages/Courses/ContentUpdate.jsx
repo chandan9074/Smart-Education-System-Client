@@ -69,7 +69,7 @@ const ContentUpdate = () => {
           marginTop: "10vh",
         },
       });
-      navigate(`/course/${id}`);
+      // navigate(`/course/${id}`);
     } else {
       message.error({
         content: "Invalid Username or Password.",

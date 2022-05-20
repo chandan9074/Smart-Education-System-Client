@@ -1,4 +1,5 @@
 import React from "react";
+import logo from "../assets/Images/ses_logo.png";
 
 const Footer = () => {
   return (
@@ -6,7 +7,7 @@ const Footer = () => {
       <div className='w-100 container-fluid grid grid-cols-1 md:grid-cols-3 gap-8'>
         <div className='text-justify mt-5 mx-auto'>
           <div className='mb-3 flex justify-center md:justify-start items-center text-xl font-semibold'>
-            S.E.S
+            <img className='w-20 mx-auto' src={logo} alt='' />
           </div>
           <p>
             We provide trainers, learners, and others involved in education with
